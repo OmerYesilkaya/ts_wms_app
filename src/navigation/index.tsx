@@ -16,7 +16,7 @@ import { ColorSchemeName, Pressable } from 'react-native';
 
 import { COLORS } from '@app/constants';
 import { useColorScheme } from '@app/hooks';
-import { NotFoundScreen, ModalScreen } from '@app/screens';
+import { NotFoundScreen, ModalScreen, Home } from '@app/screens';
 
 import {
   RootStackParamList,
@@ -85,7 +85,7 @@ function BottomTabNavigator() {
     >
       <BottomTab.Screen
         name="TabOne"
-        component={NotFoundScreen}
+        component={Home}
         options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
           title: 'Tab One',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,

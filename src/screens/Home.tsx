@@ -1,15 +1,20 @@
-import { Text, View } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
-type HomePropTypes = {
-  defaultValue: string;
-};
-
-const Home: React.FC<HomePropTypes> = ({ defaultValue }) => {
+const Home: React.FC = () => {
   return (
-    <View>
-      <Text>test</Text>
+    <View style={styles.center}>
+      <Text>Home Screen</Text>
     </View>
   );
 };
 
 export default Home;
+
+const styles = StyleSheet.create({
+  center: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
