@@ -1,3 +1,4 @@
 import EditScreenInfo from './EditScreenInfo';
+import Common from './Common';
 
-export { EditScreenInfo };
+export { EditScreenInfo, Common };

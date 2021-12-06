@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 
-import EditScreenInfo from '../components/EditScreenInfo';
+import { EditScreenInfo } from '@app/components';
 
 const ModalScreen: React.FC = () => {
   return (

@@ -1,0 +1,102 @@
+import React from 'react';
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+
+import { COLORS } from '@app/constants';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { ButtonSize } from '@app/types';
+
+type ButtonPropTypes = {
+  title: string;
+  onPress: () => void;
+  isLoading: boolean;
+  size?: ButtonSize;
+  theme?: 'primary' | 'secondary' | 'info';
+  icon?: any;
+  order?: 'rtl' | 'ltr';
+};
+
+const Button: React.FC<ButtonPropTypes> = ({
+  title,
+  onPress,
+  size = ButtonSize.MD,
+  theme = 'primary',
+  isLoading,
+  icon,
+  order,
+}) => {
+  return (
+    <TouchableOpacity
+      style={[
+        styles.container,
+        {
+          backgroundColor: COLORS.button.background[theme],
+          paddingHorizontal: size * 3 + 1,
+          paddingVertical: size * 2 + 1,
+        },
+      ]}
+      onPress={onPress}
+      disabled={isLoading}
+    >
+      {isLoading ? (
+        <ActivityIndicator color="white" />
+      ) : (
+        <View style={styles.align}>
+          {icon && order === 'rtl' && (
+            <MaterialCommunityIcons
+              {...icon}
+              color={COLORS.button.text[theme]}
+              size={size * 4 + 10}
+              style={{ marginRight: size }}
+            />
+          )}
+          <Text
+            style={[
+              styles.text,
+              {
+                color: COLORS.button.text[theme],
+                fontSize: size * 4 + 10,
+                fontWeight: `${Math.max(
+                  500,
+                  Math.min(size * 100, 800)
+                )}` as any,
+              },
+            ]}
+          >
+            {title}
+          </Text>
+          {icon && order === 'ltr' && (
+            <MaterialCommunityIcons
+              {...icon}
+              color={COLORS.button.text[theme]}
+              size={size * 4 + 10}
+              style={{ marginLeft: size }}
+            />
+          )}
+        </View>
+      )}
+    </TouchableOpacity>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    // font family
+  },
+  align: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+});
+
+export default Button;
