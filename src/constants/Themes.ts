@@ -41,4 +41,16 @@ export default {
       },
     },
   },
+  textInput: {
+    primary: {
+      text: COLORS.black,
+      background: COLORS.white,
+      placeholder: undefined,
+    },
+    secondary: {
+      text: COLORS.white,
+      background: COLORS.black,
+      placeholder: COLORS.light,
+    },
+  },
 };

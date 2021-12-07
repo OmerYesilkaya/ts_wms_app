@@ -19,15 +19,35 @@ const Home: React.FC = () => {
         fill={true}
       />
       <Text style={styles.title}>RadioInput</Text>
-      <Common.RadioInput
-        size={Size.SM}
-        title="mannlich"
-        onPress={() => null}
-        selected={true}
-        theme="primary"
+      <View style={{ flexDirection: 'row' }}>
+        <Common.RadioInput
+          size={Size.SM}
+          title="mannlich"
+          onPress={() => null}
+          selected={true}
+          theme="primary"
+          icon={{ name: 'face' }}
+          order="rtl"
+          fill={false}
+        />
+        <Common.RadioInput
+          size={Size.SM}
+          title="mannlich"
+          onPress={() => null}
+          selected={false}
+          theme="primary"
+          icon={{ name: 'face' }}
+          order="rtl"
+          fill={false}
+        />
+      </View>
+      <Text style={styles.title}>TextInput</Text>
+      <Common.TextInput
+        label="Test"
+        name="test"
+        placeholder="Enter test value"
         icon={{ name: 'face' }}
-        order="rtl"
-        fill={false}
+        size={Size.SM}
       />
     </View>
   );
@@ -44,13 +64,12 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 28,
     fontWeight: '800',
-    marginBottom: 20,
     marginTop: 10,
   },
   title: {
     fontSize: 18,
     fontWeight: '600',
-    marginBottom: 10,
-    marginTop: 5,
+    marginBottom: 5,
+    marginTop: 20,
   },
 });
