@@ -11,16 +11,16 @@ const Home: React.FC = () => {
       <Text style={styles.title}>Button</Text>
       <Common.Button
         size={Size.SM}
-        theme="primary"
-        title="test"
-        icon={{ name: 'information-outline' }}
+        theme="secondary"
+        title="Weiter"
         order="rtl"
         isLoading={false}
         onPress={() => null}
+        fill={true}
       />
       <Text style={styles.title}>RadioInput</Text>
       <Common.RadioInput
-        size={Size.XS}
+        size={Size.SM}
         title="mannlich"
         onPress={() => null}
         selected={true}
@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
   center: {
     flex: 1,
     alignItems: 'center',
+    padding: 10,
   },
   header: {
     fontSize: 28,

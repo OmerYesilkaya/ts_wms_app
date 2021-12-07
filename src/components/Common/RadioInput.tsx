@@ -57,7 +57,7 @@ const RadioInput: React.FC<RadioInputPropTypes> = ({
             styles.text,
             {
               color: THEMES.radioInput[theme][state].text,
-              fontSize: size * 4 + 9,
+              fontSize: size * 4 + 8,
             },
           ]}
         >

@@ -19,6 +19,7 @@ type ButtonPropTypes = {
   theme?: 'primary' | 'secondary' | 'info';
   icon?: any;
   order?: 'rtl' | 'ltr';
+  fill?: boolean;
 };
 
 const Button: React.FC<ButtonPropTypes> = ({
@@ -29,6 +30,7 @@ const Button: React.FC<ButtonPropTypes> = ({
   isLoading,
   icon,
   order,
+  fill = false,
 }) => {
   return (
     <TouchableOpacity
@@ -38,6 +40,7 @@ const Button: React.FC<ButtonPropTypes> = ({
           backgroundColor: THEMES.button[theme].background,
           paddingHorizontal: size * 3 + 1,
           paddingVertical: size * 2 + 1,
+          width: fill ? '100%' : undefined,
         },
       ]}
       onPress={onPress}
@@ -60,7 +63,7 @@ const Button: React.FC<ButtonPropTypes> = ({
               styles.text,
               {
                 color: THEMES.button[theme].text,
-                fontSize: size * 4 + 10,
+                fontSize: size * 4 + 8,
                 fontWeight: `${Math.max(
                   500,
                   Math.min(size * 100, 800)
