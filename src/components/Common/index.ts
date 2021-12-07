@@ -1,3 +1,4 @@
 import Button from './Button';
+import RadioInput from './RadioInput';
 
-export default { Button };
+export default { Button, RadioInput };

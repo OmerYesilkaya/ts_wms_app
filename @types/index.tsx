@@ -9,7 +9,7 @@ import {
   NavigatorScreenParams,
 } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { ButtonSize } from './style';
+import { Size } from './style';
 
 declare global {
   namespace ReactNavigation {
@@ -38,4 +38,4 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
     NativeStackScreenProps<RootStackParamList>
   >;
 
-export { ButtonSize };
+export { Size };

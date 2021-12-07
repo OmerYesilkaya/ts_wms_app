@@ -7,15 +7,15 @@ import {
   View,
 } from 'react-native';
 
-import { COLORS } from '@app/constants';
+import { THEMES } from '@app/constants';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { ButtonSize } from '@app/types';
+import { Size } from '@app/types';
 
 type ButtonPropTypes = {
   title: string;
   onPress: () => void;
   isLoading: boolean;
-  size?: ButtonSize;
+  size?: Size;
   theme?: 'primary' | 'secondary' | 'info';
   icon?: any;
   order?: 'rtl' | 'ltr';
@@ -24,7 +24,7 @@ type ButtonPropTypes = {
 const Button: React.FC<ButtonPropTypes> = ({
   title,
   onPress,
-  size = ButtonSize.MD,
+  size = Size.MD,
   theme = 'primary',
   isLoading,
   icon,
@@ -35,7 +35,7 @@ const Button: React.FC<ButtonPropTypes> = ({
       style={[
         styles.container,
         {
-          backgroundColor: COLORS.button.background[theme],
+          backgroundColor: THEMES.button[theme].background,
           paddingHorizontal: size * 3 + 1,
           paddingVertical: size * 2 + 1,
         },
@@ -50,7 +50,7 @@ const Button: React.FC<ButtonPropTypes> = ({
           {icon && order === 'rtl' && (
             <MaterialCommunityIcons
               {...icon}
-              color={COLORS.button.text[theme]}
+              color={THEMES.button[theme].text}
               size={size * 4 + 10}
               style={{ marginRight: size }}
             />
@@ -59,7 +59,7 @@ const Button: React.FC<ButtonPropTypes> = ({
             style={[
               styles.text,
               {
-                color: COLORS.button.text[theme],
+                color: THEMES.button[theme].text,
                 fontSize: size * 4 + 10,
                 fontWeight: `${Math.max(
                   500,
@@ -73,7 +73,7 @@ const Button: React.FC<ButtonPropTypes> = ({
           {icon && order === 'ltr' && (
             <MaterialCommunityIcons
               {...icon}
-              color={COLORS.button.text[theme]}
+              color={THEMES.button[theme].text}
               size={size * 4 + 10}
               style={{ marginLeft: size }}
             />
