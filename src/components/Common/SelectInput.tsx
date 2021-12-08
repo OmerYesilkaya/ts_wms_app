@@ -1,3 +1,4 @@
+import { placeholder } from 'i18n-js';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
@@ -9,12 +10,14 @@ type Item = {
 
 type SelectInputPropTypes = {
   items: Item[];
+  placeholder: string;
   label: string;
   onValueChange: (value: string | number) => void;
 };
 
 const SelectInput: React.FC<SelectInputPropTypes> = ({
   label,
+  placeholder,
   items,
   onValueChange,
 }) => {
@@ -25,6 +28,7 @@ const SelectInput: React.FC<SelectInputPropTypes> = ({
         items={items}
         onValueChange={onValueChange}
         style={pickerSelectStyles}
+        placeholder={placeholder}
       />
     </View>
   );

@@ -5,6 +5,7 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 type DateInputPropTypes = {
   label: string;
+  placeholder: string;
   mode?: 'date' | 'time' | 'datetime';
   date: Date | null;
   setDate: React.Dispatch<React.SetStateAction<Date | null>>;
@@ -12,6 +13,7 @@ type DateInputPropTypes = {
 
 const DateInput: React.FC<DateInputPropTypes> = ({
   label,
+  placeholder,
   mode = 'date',
   date,
   setDate,
@@ -33,7 +35,7 @@ const DateInput: React.FC<DateInputPropTypes> = ({
                 month: 'long',
                 year: 'numeric',
               })
-            : 'Select a date...'}
+            : placeholder}
         </Text>
       </TouchableOpacity>
       <DateTimePickerModal
