@@ -28,7 +28,6 @@ const TextInput: React.FC<TextInputPropTypes> = ({
   placeholder,
   defaultValue,
   keyboardType = 'default',
-  size = Size.SM,
   theme = 'primary',
 }) => {
   return (
@@ -42,14 +41,13 @@ const TextInput: React.FC<TextInputPropTypes> = ({
       >
         <MaterialCommunityIcons
           {...icon}
-          size={(size * 4 + 8) * 2}
+          size={30}
           color={THEMES.textInput[theme].text}
         />
         <NativeTextInput
           style={[
             styles.input,
             {
-              fontSize: size * 4 + 8,
               color: THEMES.textInput[theme].text,
             },
           ]}
@@ -73,6 +71,8 @@ const styles = StyleSheet.create({
   },
   input: {
     padding: 12,
+    fontSize: 16,
+    height: 42,
   },
   inputContainer: {
     flexDirection: 'row',

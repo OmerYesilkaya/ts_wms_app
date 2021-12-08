@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { Common } from '@app/components';
 import { Size } from '@app/types';
 
 const Home: React.FC = () => {
+  const [date, setDate] = useState(new Date());
   return (
     <View style={styles.center}>
       <Text style={styles.header}>Components</Text>
@@ -56,6 +57,12 @@ const Home: React.FC = () => {
           { value: 2, label: 'test2' },
         ]}
         onValueChange={() => null}
+      />
+      <Common.DateInput
+        label="DatePickerLabel"
+        mode="date"
+        date={date}
+        setDate={setDate}
       />
     </View>
   );

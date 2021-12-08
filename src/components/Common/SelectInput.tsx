@@ -50,6 +50,7 @@ const pickerSelectStyles = StyleSheet.create({
     color: 'black',
     backgroundColor: 'white',
     borderRadius: 5,
+    height: 42,
 
     paddingRight: 30, // to ensure the text is never behind the icon
   },
@@ -60,6 +61,7 @@ const pickerSelectStyles = StyleSheet.create({
     color: 'black',
     backgroundColor: 'white',
     borderRadius: 5,
+    height: 42,
 
     paddingRight: 30, // to ensure the text is never behind the icon
   },
