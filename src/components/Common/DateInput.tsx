@@ -7,7 +7,7 @@ type DateInputPropTypes = {
   label: string;
   mode?: 'date' | 'time' | 'datetime';
   date: Date | null;
-  setDate: React.Dispatch<React.SetStateAction<Date>>;
+  setDate: React.Dispatch<React.SetStateAction<Date | null>>;
 };
 
 const DateInput: React.FC<DateInputPropTypes> = ({
@@ -25,7 +25,7 @@ const DateInput: React.FC<DateInputPropTypes> = ({
         onPress={() => setIsVisible(true)}
       >
         <MaterialCommunityIcons name="calendar" size={30} />
-        <Text style={[styles.date, { color: !date ? 'lightgray' : 'default' }]}>
+        <Text style={[styles.date, { color: date ? 'default' : 'lightgray' }]}>
           {date
             ? date.toLocaleDateString('de-DE', {
                 weekday: 'long',
@@ -37,7 +37,7 @@ const DateInput: React.FC<DateInputPropTypes> = ({
         </Text>
       </TouchableOpacity>
       <DateTimePickerModal
-        date={date ? date : undefined}
+        date={date ?? undefined}
         isVisible={isVisible}
         mode={mode}
         onConfirm={(value: Date) => {
