@@ -53,6 +53,7 @@ const Home: React.FC = () => {
       />
       <Common.SelectInput
         label="SelectLabel"
+        placeholder="Select a value..."
         items={[
           { value: 1, label: 'test1' },
           { value: 2, label: 'test2' },
@@ -61,6 +62,7 @@ const Home: React.FC = () => {
       />
       <Common.DateInput
         label="DatePickerLabel"
+        placeholder="Select a date..."
         mode="date"
         date={date}
         setDate={setDate}
