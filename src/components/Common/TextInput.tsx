@@ -70,9 +70,9 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   input: {
-    padding: 12,
+    flex: 1,
+    padding: 10,
     fontSize: 16,
-    height: 42,
   },
   inputContainer: {
     flexDirection: 'row',
@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     borderRadius: 5,
     paddingHorizontal: 7,
+    height: 42,
   },
 });
 

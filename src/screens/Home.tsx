@@ -5,7 +5,8 @@ import { Common } from '@app/components';
 import { Size } from '@app/types';
 
 const Home: React.FC = () => {
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState<Date | null>(null);
+
   return (
     <View style={styles.center}>
       <Text style={styles.header}>Components</Text>
