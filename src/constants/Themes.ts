@@ -1,56 +1,56 @@
-import { COLORS } from '.';
+import Colors from './Colors';
 
 export default {
   button: {
     primary: {
-      text: COLORS.white,
-      background: COLORS.wmsColorMedium,
+      text: Colors.white,
+      background: Colors.wmsColorMedium,
     },
     secondary: {
-      text: COLORS.white,
-      background: COLORS.primary,
+      text: Colors.white,
+      background: Colors.primary,
     },
     info: {
-      text: COLORS.light,
-      background: COLORS.medium,
+      text: Colors.light,
+      background: Colors.medium,
     },
   },
   radioInput: {
     primary: {
       selected: {
-        text: COLORS.primary,
-        background: COLORS.wmsColorMedium,
-        border: COLORS.primary,
+        text: Colors.primary,
+        background: Colors.wmsColorMedium,
+        border: Colors.primary,
       },
       notSelected: {
-        text: COLORS.wmsColorDark,
-        background: COLORS.wmsColorMedium,
+        text: Colors.wmsColorDark,
+        background: Colors.wmsColorMedium,
         border: 'transparent',
       },
     },
     secondary: {
       selected: {
-        text: COLORS.primary,
-        background: COLORS.wmsColorMedium,
-        border: COLORS.primary,
+        text: Colors.primary,
+        background: Colors.wmsColorMedium,
+        border: Colors.primary,
       },
       notSelected: {
-        text: COLORS.wmsColorDark,
-        background: COLORS.wmsColorMedium,
+        text: Colors.wmsColorDark,
+        background: Colors.wmsColorMedium,
         border: 'transparent',
       },
     },
   },
   textInput: {
     primary: {
-      text: COLORS.black,
-      background: COLORS.white,
+      text: Colors.black,
+      background: Colors.white,
       placeholder: undefined,
     },
     secondary: {
-      text: COLORS.white,
-      background: COLORS.black,
-      placeholder: COLORS.light,
+      text: Colors.white,
+      background: Colors.black,
+      placeholder: Colors.light,
     },
   },
 };

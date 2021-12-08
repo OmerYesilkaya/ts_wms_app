@@ -43,11 +43,19 @@ const Home: React.FC = () => {
       </View>
       <Text style={styles.title}>TextInput</Text>
       <Common.TextInput
-        label="Test"
+        label="TextInputLabel"
         name="test"
         placeholder="Enter test value"
         icon={{ name: 'face' }}
         size={Size.SM}
+      />
+      <Common.SelectInput
+        label="SelectLabel"
+        items={[
+          { value: 1, label: 'test1' },
+          { value: 2, label: 'test2' },
+        ]}
+        onValueChange={() => null}
       />
     </View>
   );
