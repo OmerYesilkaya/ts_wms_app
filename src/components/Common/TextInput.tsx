@@ -6,12 +6,15 @@ import {
   TextInput as NativeTextInput,
   View,
 } from 'react-native';
+
 import { Size } from '@app/types';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { THEMES } from '@app/constants';
+import { ErrorMessage, useFormikContext } from 'formik';
+import Common from '.';
 
 type TextInputPropTypes = {
-  icon?: any;
+  icon?: React.ComponentProps<typeof MaterialCommunityIcons>['name'];
   name: string;
   label: string;
   placeholder: string;
@@ -30,6 +33,9 @@ const TextInput: React.FC<TextInputPropTypes> = ({
   keyboardType = 'default',
   theme = 'primary',
 }) => {
+  const { setFieldTouched, setFieldValue, errors, touched, values } =
+    useFormikContext<any>();
+
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
@@ -40,11 +46,14 @@ const TextInput: React.FC<TextInputPropTypes> = ({
         ]}
       >
         <MaterialCommunityIcons
-          {...icon}
+          name={icon}
           size={30}
           color={THEMES.textInput[theme].text}
         />
         <NativeTextInput
+          value={values[name]}
+          onChangeText={(text) => setFieldValue(name, text)}
+          onBlur={() => setFieldTouched(name)}
           style={[
             styles.input,
             {
@@ -57,6 +66,7 @@ const TextInput: React.FC<TextInputPropTypes> = ({
           placeholderTextColor={THEMES.textInput[theme].placeholder}
         />
       </View>
+      <ErrorMessage component={Common.ErrorMessage} name={name} />
     </View>
   );
 };

@@ -4,6 +4,7 @@ type Message =
   | string
   | Record<string, unknown>
   | ((scope: Scope) => string | Record<string, unknown>);
+
 interface InterpolateOptions {
   [key: string]: any;
 }
@@ -14,8 +15,16 @@ interface TranslateOptions extends InterpolateOptions {
   defaultValue?: Message;
 }
 
-declare interface IContext {
+type LocaleContext = {
   t: (scope: string | string[], options?: TranslateOptions) => string;
   locale: string;
   changeLocale: React.Dispatch<string>;
-}
+};
+
+export type {
+  LocaleContext,
+  TranslateOptions,
+  InterpolateOptions,
+  Message,
+  Scope,
+};

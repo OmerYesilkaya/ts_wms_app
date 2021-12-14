@@ -1,13 +1,14 @@
 import React, { useState, useContext, createContext } from 'react';
 import i18n from 'i18n-js';
 import { LANGUAGES } from '@app/constants';
+import type { LocaleContext as LocaleContextType } from '@app/types';
 
 const translationGetters = {
   de: require('@app/locales/de.json'),
   en: require('@app/locales/en.json'),
 };
 
-const LocaleContext = createContext<IContext>({} as IContext);
+const LocaleContext = createContext<LocaleContextType>({} as LocaleContextType);
 
 export const LocaleProvider = (props: any) => {
   const [locale, setLocale] = useState(LANGUAGES.DEFAULT_LANGUAGE);

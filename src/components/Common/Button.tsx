@@ -13,11 +13,12 @@ import { Size } from '@app/types';
 
 type ButtonPropTypes = {
   title: string;
-  onPress: () => void;
+  onPress?: () => void;
+  type?: 'button' | 'submit' | 'reset';
   isLoading: boolean;
   size?: Size;
   theme?: 'primary' | 'secondary' | 'info';
-  icon?: any;
+  icon?: React.ComponentProps<typeof MaterialCommunityIcons>;
   order?: 'rtl' | 'ltr';
   fill?: boolean;
 };

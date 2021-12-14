@@ -28,7 +28,7 @@ const Home: React.FC = () => {
           onPress={() => null}
           selected={true}
           theme="primary"
-          icon={{ name: 'face' }}
+          icon="face"
           order="rtl"
           fill={false}
         />
@@ -38,7 +38,7 @@ const Home: React.FC = () => {
           onPress={() => null}
           selected={false}
           theme="primary"
-          icon={{ name: 'face' }}
+          icon="face"
           order="rtl"
           fill={false}
         />
@@ -48,7 +48,7 @@ const Home: React.FC = () => {
         label="TextInputLabel"
         name="test"
         placeholder="Enter test value"
-        icon={{ name: 'face' }}
+        icon="face"
         size={Size.SM}
       />
       <Common.SelectInput

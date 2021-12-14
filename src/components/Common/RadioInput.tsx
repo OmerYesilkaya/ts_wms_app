@@ -2,14 +2,14 @@ import React from 'react';
 import { View, StyleSheet, TouchableWithoutFeedback, Text } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import { COLORS, THEMES } from '@app/constants';
+import { THEMES } from '@app/constants';
 import { Size } from '@app/types';
 
 type RadioInputPropTypes = {
   selected: boolean;
   onPress: () => void;
   theme?: 'primary' | 'secondary';
-  icon?: any;
+  icon?: React.ComponentProps<typeof MaterialCommunityIcons>['name'];
   title: string;
   size?: Size;
   order?: 'rtl' | 'ltr';
@@ -45,8 +45,7 @@ const RadioInput: React.FC<RadioInputPropTypes> = ({
       >
         {icon && order === 'rtl' && (
           <MaterialCommunityIcons
-            name={icon as any}
-            {...icon}
+            name={icon}
             size={size * 6 + 20}
             color={THEMES.radioInput[theme][state].text}
             style={{ marginRight: size }}
@@ -65,8 +64,7 @@ const RadioInput: React.FC<RadioInputPropTypes> = ({
         </Text>
         {icon && order === 'ltr' && (
           <MaterialCommunityIcons
-            name={icon as any}
-            {...icon}
+            name={icon}
             size={size * 4 + 20}
             color={THEMES.radioInput[theme][state].text}
             style={{ marginLeft: size }}

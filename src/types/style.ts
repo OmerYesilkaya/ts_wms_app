@@ -1,4 +1,4 @@
-export enum Size {
+enum Size {
   XS = 2,
   SM = 3,
   MD = 4,
@@ -6,3 +6,5 @@ export enum Size {
   XL = 6,
   XXL = 7,
 }
+
+export { Size };

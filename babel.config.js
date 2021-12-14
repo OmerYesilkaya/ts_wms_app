@@ -7,7 +7,10 @@ module.exports = function (api) {
         'module-resolver',
         {
           alias: {
+            '@app/api': './src/api',
             '@app/assets': './src/assets',
+            '@app/html': './src/assets/html',
+            '@app/animations': './src/assets/animations',
             '@app/images': './src/assets/images',
             '@app/locales': './src/assets/locales',
             '@app/components': './src/components',
@@ -16,8 +19,8 @@ module.exports = function (api) {
             '@app/navigation': './src/navigation',
             '@app/hooks': './src/hooks',
             '@app/lib': './src/lib',
+            '@app/types': './src/types',
             '@app/styles': './src/styles',
-            '@app/types': './@types',
           },
         },
       ],

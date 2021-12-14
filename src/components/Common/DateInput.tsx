@@ -29,7 +29,7 @@ const DateInput: React.FC<DateInputPropTypes> = ({
         <MaterialCommunityIcons name="calendar" size={30} />
         <Text style={[styles.date, { color: date ? 'default' : 'lightgray' }]}>
           {date
-            ? date.toLocaleDateString('de-DE', {
+            ? date.toLocaleDateString('de-LI', {
                 weekday: 'long',
                 day: 'numeric',
                 month: 'long',
