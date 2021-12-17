@@ -15,10 +15,11 @@ type ButtonPropTypes = {
   title: string;
   onPress?: () => void;
   type?: 'button' | 'submit' | 'reset';
-  isLoading: boolean;
+  isLoading?: boolean;
   size?: Size;
   theme?: 'primary' | 'secondary' | 'info';
-  icon?: React.ComponentProps<typeof MaterialCommunityIcons>;
+  icon?: React.ComponentProps<typeof MaterialCommunityIcons>['name'];
+  iconSize?: number;
   order?: 'rtl' | 'ltr';
   fill?: boolean;
 };
@@ -28,8 +29,9 @@ const Button: React.FC<ButtonPropTypes> = ({
   onPress,
   size = Size.MD,
   theme = 'primary',
-  isLoading,
+  isLoading = false,
   icon,
+  iconSize,
   order,
   fill = false,
 }) => {
@@ -53,9 +55,9 @@ const Button: React.FC<ButtonPropTypes> = ({
         <View style={styles.align}>
           {icon && order === 'rtl' && (
             <MaterialCommunityIcons
-              {...icon}
+              name={icon}
               color={THEMES.button[theme].text}
-              size={size * 4 + 10}
+              size={iconSize ? iconSize : size * 4 + 10}
               style={{ marginRight: size }}
             />
           )}
@@ -66,7 +68,7 @@ const Button: React.FC<ButtonPropTypes> = ({
                 color: THEMES.button[theme].text,
                 fontSize: size * 4 + 8,
                 fontWeight: `${Math.max(
-                  500,
+                  600,
                   Math.min(size * 100, 800)
                 )}` as any,
               },
@@ -76,9 +78,9 @@ const Button: React.FC<ButtonPropTypes> = ({
           </Text>
           {icon && order === 'ltr' && (
             <MaterialCommunityIcons
-              {...icon}
+              name={icon}
               color={THEMES.button[theme].text}
-              size={size * 4 + 10}
+              size={iconSize ? iconSize : size * 4 + 10}
               style={{ marginLeft: size }}
             />
           )}

@@ -1,11 +1,12 @@
 import React from 'react';
 
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import { COLORS } from '@app/constants';
-import { RootStackParamList } from '@app/types';
+import { NavigationHeader } from '@app/components';
+import { ProfilesScreen } from '@app/screens';
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack = createStackNavigator();
 
 const FeedNavigator = () => (
   <Stack.Navigator>
@@ -20,7 +21,7 @@ const FeedNavigator = () => (
       }}
       component={ProfilesScreen}
     />
-    <Stack.Screen
+    {/* <Stack.Screen
       name="AddProfileScreen"
       options={{
         headerStyle: { backgroundColor: COLORS.wmsColor },
@@ -77,7 +78,8 @@ const FeedNavigator = () => (
         headerBackTitleVisible: false,
       }}
       component={ProfileDetailsScreen}
-    />
+    /> */}
   </Stack.Navigator>
 );
+
 export default FeedNavigator;

@@ -1,5 +1,6 @@
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import React, { useState } from 'react';
+
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 

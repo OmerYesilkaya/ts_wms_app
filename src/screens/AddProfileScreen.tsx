@@ -6,19 +6,19 @@ import { footIcon } from '@app/images';
 import { profiles } from '@app/api';
 
 import { routes } from '@app/navigation';
-import { useAuth, useApi } from '@app/hooks';
+import { useApi } from '@app/hooks';
+import { useAuth } from '@app/auth'; // ??
 
 import { COLORS } from '@app/constants';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Gender, ProfileType, RootStackParamList } from '@app/types';
+import { Gender, ProfileType } from '@app/types';
 import { AddProfileForm } from '@app/components';
+import { date } from 'src/utility';
 
 const startDate = new Date();
 startDate.setDate(startDate.getMonth() - 365 * 10);
 
-type Props = NativeStackScreenProps<RootStackParamList, 'AddProfileScreen'>;
-
-function AddProfileScreen({ route, navigation }: Props) {
+// Change any types when navigation part is ts
+function AddProfileScreen({ route, navigation }: any) {
   const { user } = useAuth();
   const profileParams = route.params;
   const addProfilesApi = useApi(profiles.addProfile);
@@ -46,7 +46,7 @@ function AddProfileScreen({ route, navigation }: Props) {
     shoeSize: '',
     shoeWidth: '',
     lastMeasurement: '',
-    lastMeasurementUnix: '',
+    lastMeasurementUnix: new Date().getMilliseconds(),
     gender: profileParams ? profileParams.gender : 'MALE',
     measurements: [],
   } as ProfileType;
@@ -117,7 +117,7 @@ function AddProfileScreen({ route, navigation }: Props) {
         shoeSize: '',
         shoeWidth: '',
         lastMeasurement: '',
-        lastMeasurementUnix: '',
+        lastMeasurementUnix: new Date().getMilliseconds(),
         gender: selectedGender,
         measurements: [],
       } as ProfileType;

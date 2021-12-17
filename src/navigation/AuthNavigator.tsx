@@ -1,8 +1,9 @@
 import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { RootStackParamList } from '@app/types';
+import { createStackNavigator } from '@react-navigation/stack';
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+import { ProfilesScreen, LoginScreen } from '@app/screens';
+
+const Stack = createStackNavigator();
 
 const AuthNavigator = () => (
   <Stack.Navigator>

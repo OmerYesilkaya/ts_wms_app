@@ -1,6 +1,7 @@
+import React from 'react';
 import { Text, View } from 'react-native';
 
-const ErrorMessage: React.FC<any> = (props) => {
+const ErrorText: React.FC<any> = (props) => {
   console.log('props', props);
 
   return (
@@ -10,4 +11,4 @@ const ErrorMessage: React.FC<any> = (props) => {
   );
 };
 
-export default ErrorMessage;
+export default ErrorText;

@@ -13,7 +13,9 @@ export type ProfileType = {
   shoeSize: string;
   shoeWidth: string;
   lastMeasurement: string;
-  lastMeasurementUnix: string;
+  lastMeasurementSize?: string;
+  lastMeasurementUnix?: number;
   gender: Gender;
   measurements: any[]; // fix
+  FPs?: any; // ??
 };

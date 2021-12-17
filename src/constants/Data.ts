@@ -1,6 +1,6 @@
 import { routes } from '@app/navigation';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { COLORS } from '.';
+import { COLORS } from '@app/constants';
 
 type Icon = {
   name: React.ComponentProps<typeof MaterialCommunityIcons>['name'];

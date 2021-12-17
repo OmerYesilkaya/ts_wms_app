@@ -1,19 +1,14 @@
 import React from 'react';
 import { StyleSheet, FlatList } from 'react-native';
 
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-
-import { List } from '@app/components';
+import { Common, List } from '@app/components';
 import { COLORS } from '@app/constants';
-import { useAuth } from '@app/hooks';
-import { RootStackParamList } from '@app/types';
+import { useAuth } from '@app/auth';
 
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { DATA } from '@app/constants';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'AccountScreen'>;
-
-function AccountScreen({ navigation }: Props) {
+// Change any types when navigation part is ts
+function AccountScreen({ navigation }: any) {
   const { user, logOut } = useAuth();
 
   function handleAccountClick() {
@@ -21,7 +16,7 @@ function AccountScreen({ navigation }: Props) {
   }
 
   return (
-    <SafeAreaView style={styles.screen}>
+    <Common.Screen style={styles.screen}>
       <FlatList
         data={[
           {
@@ -29,6 +24,7 @@ function AccountScreen({ navigation }: Props) {
             subTitle: user?.emails[0],
             icon: null,
             targetScreen: null,
+            styles: undefined,
           },
           ...DATA.aboutUsMenuItems,
         ]}
@@ -54,7 +50,7 @@ function AccountScreen({ navigation }: Props) {
           />
         )}
       />
-    </SafeAreaView>
+    </Common.Screen>
   );
 }
 

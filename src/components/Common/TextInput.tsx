@@ -6,12 +6,14 @@ import {
   TextInput as NativeTextInput,
   View,
 } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
+import { ErrorMessage, useFormikContext } from 'formik';
 
 import { Size } from '@app/types';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { THEMES } from '@app/constants';
-import { ErrorMessage, useFormikContext } from 'formik';
-import Common from '.';
+
+import ErrorText from './ErrorText';
 
 type TextInputPropTypes = {
   icon?: React.ComponentProps<typeof MaterialCommunityIcons>['name'];
@@ -66,7 +68,7 @@ const TextInput: React.FC<TextInputPropTypes> = ({
           placeholderTextColor={THEMES.textInput[theme].placeholder}
         />
       </View>
-      <ErrorMessage component={Common.ErrorMessage} name={name} />
+      <ErrorMessage component={ErrorText} name={name} />
     </View>
   );
 };

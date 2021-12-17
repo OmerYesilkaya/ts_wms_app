@@ -1,11 +1,8 @@
 import { create } from 'apisauce';
-
+import { cache } from '@app/utility';
+import { storage as authStorage } from '@app/auth';
 import { SETTINGS } from '@app/constants';
-import { AuthStorage, Cache } from '@app/lib';
-
-type ClientResponse = {
-  statusCode: number;
-};
+import localClient from './localClient';
 
 const apiClient = create({
   baseURL: SETTINGS.apiUrl,
@@ -14,7 +11,7 @@ const apiClient = create({
 //   const lc = localClient;
 
 apiClient.addAsyncRequestTransform(async (request) => {
-  const authToken = await AuthStorage.getToken();
+  const authToken = await authStorage.getToken();
   if (!authToken) return;
   request.headers['Authorization'] = `Bearer ${authToken}`;
 });
@@ -22,33 +19,41 @@ apiClient.addAsyncRequestTransform(async (request) => {
 const get = apiClient.get;
 
 apiClient.get = async (url, params, axiosConfig) => {
-  const response = await get<ClientResponse>(url, params, axiosConfig);
+  const response = await get(url, params, axiosConfig);
 
   if (response.ok) {
     //Exceptionally we have to compare local and live profile data here..
     //It is not the best place, but most proper for now.
 
     if (url.endsWith('/profiles')) {
-      // read Cache profiles
-      console.log('LOADING PROFILES');
+      // read cache profiles
 
-      // Cache.store(url, response.data);
+      // cache.store(url, response.data);
 
       // read live profiles
       const lP = response['data'];
       for (let liveIndex = 0; liveIndex < lP.length; liveIndex++) {
         //get local measurements of thisprofile id;
-        const cP = await Cache.get(lP[liveIndex].profile_id);
-        console.log('CP', cP);
+        //const cP = await cache.get(lP[liveIndex].profile_id);
+        let cP = lP[liveIndex].measurements;
+
         if (cP) {
+          for (let c = 0; c < cP.length; c++) {
+            let date = new Date(cP[c].createdAt); // some mock date
+            // console.log('date', date);
+            cP[c].recordDateUnix = date.getTime() / 1000;
+          }
+
           if (cP.length > 0) {
             let latest = cP
               .sort((a, b) => (a.recordDateUnix > b.recordDateUnix ? -1 : 1))
               .map((item) => item);
 
             lP[liveIndex].lastMeasurementUnix = latest[0].recordDateUnix;
-            lP[liveIndex].lastMeasurementSize = latest[0].shoeSize;
-            lP[liveIndex].shoeWidth = latest[0].shoeWidth;
+            lP[liveIndex].lastMeasurementSize = latest[0].shoe_size;
+            lP[liveIndex].shoe_width = latest[0].shoe_width;
+            lP[liveIndex].weight = latest[0].weight;
+            lP[liveIndex].height = latest[0].height;
           }
         }
       }
@@ -57,7 +62,7 @@ apiClient.get = async (url, params, axiosConfig) => {
       return response;
     }
 
-    //Cache.store(url, response["data"]);
+    //cache.store(url, response["data"]);
     return response;
   } else if (response.data) {
     //check for user token valid
@@ -67,10 +72,10 @@ apiClient.get = async (url, params, axiosConfig) => {
     }
   }
 
-  const data = await Cache.get(url);
+  const data = await cache.get(url);
   return data
-    ? { ok: true, status: response.data?.statusCode, data }
-    : { ok: false, status: response.data?.statusCode };
+    ? { ok: true, status: response.data.statusCode, data }
+    : { ok: false, status: response.data.statusCode };
 };
 
 export default apiClient;
@@ -79,12 +84,12 @@ export default apiClient;
 //   //   const response = await get(url, params, axiosConfig);
 
 //   // if (response.ok) {
-//   //   Cache.store(url, response.data);
+//   //   cache.store(url, response.data);
 //   //   return response;
 //   // }
 
 //   // WORK LOCAL ONLY FOR NOW
-//   const data = await Cache.get(url);
+//   const data = await cache.get(url);
 //   return data ? { ok: true, data } : response;
 // };
 

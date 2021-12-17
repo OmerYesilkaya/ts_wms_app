@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Cache } from '@app/lib';
+import cache from '../utility/cache';
 
 const prefix = 'cache';
 let latestProfiles = [];
@@ -40,16 +40,16 @@ let latestProfiles = [];
 const addLocalMeasurement = async (measurement) => {
   const cacheKey = measurement.profile_id;
 
-  var data = await Cache.get(cacheKey);
+  var data = await cache.get(cacheKey);
   if (data === null) {
     data = [];
   }
   data.push(measurement);
-  Cache.store(cacheKey, data);
+  cache.store(cacheKey, data);
 
   // for (let index = 0; index < data.length; index++) {
-  //     data[index].shoeSize = measurement.shoeSize
-  //     data[index].shoeWidth = measurement.shoeWidth
+  //     data[index].shoe_size = measurement.shoe_size
+  //     data[index].shoe_width = measurement.shoe_width
   //     data[index].lastMeasurement = measurement.recordDate
   //     data[index].lastMeasurementUnix = measurement.recordDateUnix
   //     data[index].measurements.push(measurement)
@@ -64,7 +64,7 @@ const addLocalMeasurement = async (measurement) => {
 const getLocalMeasurements = async (profile) => {
   const cacheKey = profile.profile_id;
 
-  var data = await Cache.get(cacheKey);
+  var data = await cache.get(cacheKey);
   if (data === null) {
     data = [];
   }

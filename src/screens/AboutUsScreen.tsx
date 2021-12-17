@@ -2,15 +2,11 @@ import React from 'react';
 
 import { StyleSheet } from 'react-native';
 import { WebView } from 'react-native-webview';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { aboutus, impressum, wissenswertes } from '@app/html';
 
-import { RootStackParamList } from '@app/types';
-
-type Props = NativeStackScreenProps<RootStackParamList, 'AboutUsScreen'>;
-
-function AboutUsScreen({ route }: Props) {
+// Change any types when navigation part is ts
+function AboutUsScreen({ route }: any) {
   let html = '';
 
   switch (route.params.staticPage) {

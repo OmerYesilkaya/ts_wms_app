@@ -1,0 +1,97 @@
+import React, { useEffect } from 'react';
+import { StyleSheet, FlatList, Text } from 'react-native';
+
+import { profiles, localClient } from '@app/api';
+import { Common, Card, Loader } from '@app/components';
+import { useApi } from '@app/hooks';
+import { useAuth } from '@app/auth';
+import { routes } from '@app/navigation';
+import { ProfileType, Size } from '@app/types';
+
+import MaleImage from '../assets/images/ic_boy.png';
+import FemaleImage from '../assets/images/ic_girl.png';
+import { date as dateUtils } from '@app/utility';
+
+type ItemType = {
+  item: ProfileType;
+};
+
+function ProfilesScreen({ navigation }: any) {
+  const getProfilesApiLive = useApi(profiles.getProfiles);
+  const getMeasurementsLocal = useApi(localClient.getLocalMeasurements as any); // ??
+  const { user, logOut } = useAuth();
+
+  const convertDate = (unixSecs: number): string => {
+    const dateObject = new Date(1970, 0, 1); // Epoch
+    dateObject.setSeconds(unixSecs);
+    return dateObject.toLocaleString('de-DE', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  };
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      getProfilesApiLive.request(user);
+    });
+    return unsubscribe;
+  }, [navigation]);
+
+  const renderItem = ({ item }: ItemType) => {
+    return (
+      <Card
+        name={item.name}
+        shoeSize={item.lastMeasurementSize ?? ''}
+        lastMeasurement={
+          item.lastMeasurementUnix
+            ? convertDate(item.lastMeasurementUnix)
+            : dateUtils.now()
+        }
+        image={item.gender === 'MALE' ? MaleImage : FemaleImage}
+        onPress={async () => {
+          const localFP = await getMeasurementsLocal.request(item);
+          item.FPs = localFP;
+          navigation.navigate(routes.PROFILE_DETAILS, item); // ??
+        }}
+      />
+    );
+  };
+
+  return (
+    <Common.Screen style={styles.screen}>
+      {getProfilesApiLive.error && (
+        <>
+          <Text>Session Expired</Text>
+          <Common.Button title="Login" onPress={() => logOut()} fill />
+        </>
+      )}
+      <Common.Button
+        title="Neuen Footprint angelen"
+        onPress={() => navigation.navigate(routes.NEW_PROFILE)}
+        fill
+        icon="plus-circle"
+        iconSize={50}
+        order="ltr"
+        size={Size.MD}
+      />
+      <Loader isVisible={getProfilesApiLive.loading} />
+      <FlatList
+        data={getProfilesApiLive.data}
+        keyExtractor={(item, index) => item['profile_id'] ?? index.toString()}
+        renderItem={renderItem}
+      />
+    </Common.Screen>
+  );
+}
+
+const styles = StyleSheet.create({
+  screen: {
+    paddingTop: 10,
+    paddingHorizontal: 5,
+    flex: 1,
+  },
+});
+
+export default ProfilesScreen;

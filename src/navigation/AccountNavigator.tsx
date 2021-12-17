@@ -1,11 +1,10 @@
 import React from 'react';
 
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import { RootStackParamList } from '@app/types';
 import { AccountScreen } from '@app/screens';
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack = createStackNavigator();
 
 const AccountNavigator = () => (
   <Stack.Navigator>

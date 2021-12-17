@@ -2,22 +2,23 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import { RootTabParamList } from '@app/types';
-import { AccountNavigator } from '.';
+import { AccountNavigator, FeedNavigator } from '.';
 
-const Tab = createBottomTabNavigator<RootTabParamList>();
+const Tab = createBottomTabNavigator();
 
 type AppNavigatorPropTypes = {
-  colorScheme: 'light' | 'dark';
+  colorScheme?: 'light' | 'dark';
 };
 
-const AppNavigator: React.FC<AppNavigatorPropTypes> = ({ colorScheme }) => (
+const AppNavigator: React.FC<AppNavigatorPropTypes> = ({
+  colorScheme = 'light',
+}) => (
   <Tab.Navigator
     screenOptions={{
       headerShown: false,
     }}
   >
-    {/* <Tab.Screen
+    <Tab.Screen
       name="FeedNavigator"
       component={FeedNavigator}
       options={{
@@ -25,7 +26,7 @@ const AppNavigator: React.FC<AppNavigatorPropTypes> = ({ colorScheme }) => (
           <MaterialCommunityIcons name="foot-print" color={color} size={size} />
         ),
       }}
-    /> */}
+    />
     {/* <Tab.Screen
       name="StoresScreen"
       component={StoresScreen}
