@@ -21,8 +21,6 @@ const addProfileMeasurement = (user, profileMeasurement) => {
     // data.shop_id = profileMeasurement.storeId;
   }
 
-  //console.log('data before Post', data);
-
   return client.post(
     profilesEndPoint
       .replace('USERID', user.oid)

@@ -40,7 +40,6 @@ apiClient.get = async (url, params, axiosConfig) => {
         if (cP) {
           for (let c = 0; c < cP.length; c++) {
             let date = new Date(cP[c].createdAt); // some mock date
-            // console.log('date', date);
             cP[c].recordDateUnix = date.getTime() / 1000;
           }
 
@@ -67,7 +66,6 @@ apiClient.get = async (url, params, axiosConfig) => {
   } else if (response.data) {
     //check for user token valid
     if (response.data.statusCode === 401) {
-      console.log('TOKEN EXPIRED!');
       return { ok: false, status: response.data.statusCode };
     }
   }

@@ -1,11 +1,100 @@
 import React from 'react';
 import { StyleSheet, FlatList } from 'react-native';
 
-import { Common, List } from '@app/components';
-import { COLORS } from '@app/constants';
-import { useAuth } from '@app/auth';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import { DATA } from '@app/constants';
+import { Common, List } from '@app/components';
+import { useAuth } from '@app/auth';
+import { COLORS } from '@app/constants';
+import { routes } from '@app/navigation';
+
+type MenuItem = {
+  title: string;
+  subTitle?: string;
+  icon: Icon | null;
+  styles?: any; // fix
+  targetScreen: string | null;
+  staticPage?: string;
+  externalLink?: string;
+};
+
+type Icon = {
+  name: React.ComponentProps<typeof MaterialCommunityIcons>['name'];
+  backgroundColor: string;
+};
+
+const aboutUsMenuItems = [
+  {
+    title: 'Meine Footprints',
+    icon: {
+      name: 'foot-print',
+      backgroundColor: COLORS.primary,
+    },
+    targetScreen: routes.PROFILES,
+  },
+  {
+    title: 'Shops finden',
+    icon: {
+      name: 'map-search-outline',
+      backgroundColor: COLORS.primary,
+    },
+    targetScreen: routes.SHOPS,
+  },
+  {
+    title: 'Wissenswertes', //  useful information
+    icon: {
+      name: 'comment-question-outline',
+      backgroundColor: COLORS.primary,
+    },
+    staticPage: 'faq',
+    targetScreen: routes.ABOUT_US,
+  },
+  {
+    styles: { paddingTop: 30 },
+    title: 'Über uns', //    about us
+    icon: {
+      name: 'information-outline',
+      backgroundColor: COLORS.wmsColorMedium,
+    },
+    staticPage: 'aboutus',
+    targetScreen: routes.ABOUT_US,
+  },
+  // {
+  //   title: "Einstellungen", //settings
+  //   icon: {
+  //     name: "email",
+  //     backgroundColor: COLORS.secondary,
+  //   },
+  //   targetScreen: routes.MESSAGES,
+  // },
+  {
+    title: 'Impressum', //imprint
+    icon: {
+      name: 'email',
+      backgroundColor: COLORS.wmsColorMedium,
+    },
+    staticPage: 'impressum',
+    targetScreen: routes.ABOUT_US,
+  },
+  {
+    title: 'Datenschutzerklärung', //imprint
+    icon: {
+      name: 'shield-check-outline',
+      backgroundColor: COLORS.wmsColorMedium,
+    },
+    staticPage: 'external',
+    externalLink: 'https://footprinttech.de/wms-dsgvo/',
+    targetScreen: routes.EXTERNAL_LINK,
+  },
+  {
+    title: 'Logout',
+    icon: {
+      name: 'logout',
+      backgroundColor: COLORS.medium,
+    },
+    targetScreen: 'logout',
+  },
+] as MenuItem[];
 
 // Change any types when navigation part is ts
 function AccountScreen({ navigation }: any) {
@@ -26,7 +115,7 @@ function AccountScreen({ navigation }: any) {
             targetScreen: null,
             styles: undefined,
           },
-          ...DATA.aboutUsMenuItems,
+          ...aboutUsMenuItems,
         ]}
         keyExtractor={(menuItem) => menuItem.title ?? ''}
         ItemSeparatorComponent={List.Seperator}
