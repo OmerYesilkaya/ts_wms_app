@@ -13,7 +13,7 @@ type RadioInputPropTypes = {
   title: string;
   size?: Size;
   order?: 'rtl' | 'ltr';
-  fill?: boolean;
+  totalRadioCount?: number;
 };
 
 const RadioInput: React.FC<RadioInputPropTypes> = ({
@@ -24,7 +24,7 @@ const RadioInput: React.FC<RadioInputPropTypes> = ({
   title,
   size = Size.MD,
   order = 'rtl',
-  fill = false,
+  totalRadioCount = 1,
 }) => {
   const state = selected ? 'selected' : 'notSelected';
   return (
@@ -35,11 +35,9 @@ const RadioInput: React.FC<RadioInputPropTypes> = ({
           {
             borderColor: THEMES.radioInput[theme][state].border,
             backgroundColor: THEMES.radioInput[theme][state].background,
-            minWidth: size * 20 + 80,
-            marginHorizontal: size * 2,
             paddingHorizontal: size * 2 + 4,
             paddingVertical: size + 2,
-            width: fill ? '100%' : undefined,
+            width: `${100 / totalRadioCount - 1}%`,
           },
         ]}
       >

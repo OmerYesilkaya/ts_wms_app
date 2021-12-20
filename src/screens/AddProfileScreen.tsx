@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
-import { StyleSheet, Image, View, Keyboard } from 'react-native';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import { StyleSheet, Image, View } from 'react-native';
 import { footIcon } from '@app/images';
 
 import { profiles } from '@app/api';
 
 import { routes } from '@app/navigation';
 import { useApi } from '@app/hooks';
-import { useAuth } from '@app/auth'; // ??
+import { useAuth } from '@app/auth';
 
 import { COLORS } from '@app/constants';
 import { Gender, ProfileType } from '@app/types';
 import { AddProfileForm } from '@app/components';
-import { date } from 'src/utility';
 
 const startDate = new Date();
 startDate.setDate(startDate.getMonth() - 365 * 10);
@@ -23,21 +21,13 @@ function AddProfileScreen({ route, navigation }: any) {
   const profileParams = route.params;
   const addProfilesApi = useApi(profiles.addProfile);
   const updateProfilesApi = useApi(profiles.updateProfile);
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(
-    profileParams?.birthdate ?? startDate.toISOString()
+  const [selectedDate, setSelectedDate] = useState<Date | null>(
+    profileParams?.birthdate ? new Date(profileParams?.birthdate) : startDate
   );
-  const [selectedGender, setSelectedGender] = useState(
-    profileParams?.gender ?? 'MALE'
+  const [selectedGender, setSelectedGender] = useState<Gender>(
+    profileParams?.gender ?? Gender.MALE
   );
-  const [submitted, setSubmitted] = useState(false);
-
-  const dateOptions = {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  };
 
   const profile = {
     profile_id: null,
@@ -47,34 +37,18 @@ function AddProfileScreen({ route, navigation }: any) {
     shoeWidth: '',
     lastMeasurement: '',
     lastMeasurementUnix: new Date().getMilliseconds(),
-    gender: profileParams ? profileParams.gender : 'MALE',
+    gender: profileParams ? profileParams.gender : Gender.MALE,
     measurements: [],
   } as ProfileType;
-
-  const showDatePicker = () => {
-    Keyboard.dismiss();
-    setDatePickerVisibility(true);
-  };
-
-  const hideDatePicker = () => {
-    setDatePickerVisibility(false);
-  };
-
-  const handleConfirm = (date: Date) => {
-    // setSelectedDate(date.toLocaleDateString("de-LI", dateOptions));
-    setSelectedDate(date.toISOString());
-    profile.birthdate = date.toISOString();
-    hideDatePicker();
-  };
 
   const handlePress = (gender: Gender) => {
     setSelectedGender(gender);
   };
 
   const handleSubmit = async (data: any) => {
+    console.log('DATADATA', data);
     setIsLoading(true);
-    setSubmitted(true);
-    if (selectedDate === '') {
+    if (selectedDate === null) {
       return false;
     }
 
@@ -97,7 +71,7 @@ function AddProfileScreen({ route, navigation }: any) {
           if (result.status === 200 || result.status === 201) {
             navigation.reset({
               index: 0,
-              actions: navigation.navigate(routes.PROFILES), // ??
+              actions: navigation.navigate(routes.PROFILES),
             });
             setIsLoading(false);
           } else {
@@ -122,6 +96,8 @@ function AddProfileScreen({ route, navigation }: any) {
         measurements: [],
       } as ProfileType;
 
+      console.log('user', user);
+      console.log('requestProfile', requestProfile);
       addProfilesApi
         .request(user, requestProfile)
         .then((result) => {
@@ -135,7 +111,7 @@ function AddProfileScreen({ route, navigation }: any) {
 
             navigation.replace(
               routes.MEASUREMENT_ENTRY_SELECTION,
-              requestProfile // ??
+              requestProfile
             );
             setIsLoading(false);
           } else {

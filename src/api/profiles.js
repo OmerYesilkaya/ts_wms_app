@@ -1,10 +1,11 @@
-import client from "./client";
+import client from './client';
 
-const profilesEndPoint = "users/USERID/profiles";
+const profilesEndPoint = 'users/USERID/profiles';
 
 const getProfiles = (user) => {
-  return client.get(profilesEndPoint.replace("USERID", user.oid));
+  return client.get(profilesEndPoint.replace('USERID', user.oid));
 };
+
 const addProfile = (user, profile) => {
   const data = {
     name: profile.name,
@@ -12,7 +13,7 @@ const addProfile = (user, profile) => {
     birthdate: profile.birthdate,
   };
 
-  return client.post(profilesEndPoint.replace("USERID", user.oid), data);
+  return client.post(profilesEndPoint.replace('USERID', user.oid), data);
 };
 
 const updateProfile = (user, profile) => {
@@ -23,14 +24,14 @@ const updateProfile = (user, profile) => {
   };
 
   return client.put(
-    profilesEndPoint.replace("USERID", user.oid) + "/" + profile.profile_id,
+    profilesEndPoint.replace('USERID', user.oid) + '/' + profile.profile_id,
     data
   );
 };
 
 const deleteProfile = (user, profile) => {
   return client.delete(
-    profilesEndPoint.replace("USERID", user.oid) + "/" + profile.profile_id
+    profilesEndPoint.replace('USERID', user.oid) + '/' + profile.profile_id
   );
 };
 

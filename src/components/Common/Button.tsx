@@ -3,21 +3,23 @@ import {
   ActivityIndicator,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
+  TouchableOpacity,
 } from 'react-native';
 
-import { THEMES } from '@app/constants';
+import { useFormikContext } from 'formik';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+
+import { THEMES } from '@app/constants';
 import { Size } from '@app/types';
 
 type ButtonPropTypes = {
   title: string;
   onPress?: () => void;
-  type?: 'button' | 'submit' | 'reset';
   isLoading?: boolean;
   size?: Size;
   theme?: 'primary' | 'secondary' | 'info';
+  type?: 'submit' | 'button' | 'reset';
   icon?: React.ComponentProps<typeof MaterialCommunityIcons>['name'];
   iconSize?: number;
   order?: 'rtl' | 'ltr';
@@ -33,8 +35,14 @@ const Button: React.FC<ButtonPropTypes> = ({
   icon,
   iconSize,
   order,
+  type,
   fill = false,
 }) => {
+  let formikObject: any;
+  if (type === 'submit') {
+    formikObject = useFormikContext();
+  }
+
   return (
     <TouchableOpacity
       style={[
@@ -46,7 +54,9 @@ const Button: React.FC<ButtonPropTypes> = ({
           width: fill ? '100%' : undefined,
         },
       ]}
-      onPress={onPress}
+      onPress={() =>
+        type === 'submit' ? formikObject.handleSubmit() : onPress && onPress()
+      }
       disabled={isLoading}
     >
       {isLoading ? (

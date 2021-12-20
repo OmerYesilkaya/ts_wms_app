@@ -1,17 +1,18 @@
+import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 import { Common } from '@app/components';
-import { Gender } from '@app/types';
+import { Gender, Size } from '@app/types';
 import { StyleSheet, View } from 'react-native';
 
 type AddProfileFormPropTypes = {
   handleSubmit: any;
   profile: any;
-  selectedGender: any;
-  selectedDate: any;
-  setSelectedDate: any;
-  handleGenderPress: any;
+  selectedGender: Gender;
+  selectedDate: Date | null;
+  setSelectedDate: React.Dispatch<React.SetStateAction<Date | null>>;
+  handleGenderPress: (gender: Gender) => void;
   isLoading: boolean;
 };
 
@@ -61,20 +62,24 @@ const AddProfileForm: React.FC<AddProfileFormPropTypes> = ({
               selected={selectedGender === Gender.MALE}
               onPress={() => handleGenderPress(Gender.MALE)}
               icon="face"
+              totalRadioCount={2}
             />
             <Common.RadioInput
               title="weiblich"
               selected={selectedGender === Gender.FEMALE}
               onPress={() => handleGenderPress(Gender.FEMALE)}
               icon="face-woman"
+              totalRadioCount={2}
             />
           </View>
           <View style={styles.buttonContainer}>
             <Common.Button
               title="Weiter"
               isLoading={isLoading}
-              type="submit"
+              theme="secondary"
+              size={Size.SM}
               fill
+              type="submit"
             />
           </View>
         </View>
@@ -88,7 +93,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   radioContainer: {
-    flex: 1,
+    justifyContent: 'space-between',
+    marginTop: 20,
     flexDirection: 'row',
   },
   buttonContainer: {

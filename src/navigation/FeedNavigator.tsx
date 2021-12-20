@@ -4,7 +4,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import { COLORS } from '@app/constants';
 import { NavigationHeader } from '@app/components';
-import { ProfilesScreen } from '@app/screens';
+import {
+  ProfilesScreen,
+  AddProfileScreen,
+  EntrySelectionScreen,
+  ManualEntryScreen,
+} from '@app/screens';
 
 const Stack = createStackNavigator();
 
@@ -21,7 +26,7 @@ const FeedNavigator = () => (
       }}
       component={ProfilesScreen}
     />
-    {/* <Stack.Screen
+    <Stack.Screen
       name="AddProfileScreen"
       options={{
         headerStyle: { backgroundColor: COLORS.wmsColor },
@@ -45,6 +50,7 @@ const FeedNavigator = () => (
       }}
       component={EntrySelectionScreen}
     />
+
     <Stack.Screen
       name="ManualEntryScreen"
       options={{
@@ -57,6 +63,7 @@ const FeedNavigator = () => (
       }}
       component={ManualEntryScreen}
     />
+    {/* 
     <Stack.Screen
       name="FptAppScreen"
       options={{

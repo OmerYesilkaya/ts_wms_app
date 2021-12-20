@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, FlatList, Text } from 'react-native';
+import { StyleSheet, FlatList, Text, View } from 'react-native';
 
 import { profiles, localClient } from '@app/api';
 import { Common, Card, Loader } from '@app/components';
@@ -77,11 +77,18 @@ function ProfilesScreen({ navigation }: any) {
         size={Size.MD}
       />
       <Loader isVisible={getProfilesApiLive.loading} />
-      <FlatList
-        data={getProfilesApiLive.data}
-        keyExtractor={(item, index) => item['profile_id'] ?? index.toString()}
-        renderItem={renderItem}
-      />
+      <View
+        style={{
+          marginTop: 10,
+          flex: 1,
+        }}
+      >
+        <FlatList
+          data={getProfilesApiLive.data}
+          keyExtractor={(item, index) => item['profile_id'] ?? index.toString()}
+          renderItem={renderItem}
+        />
+      </View>
     </Common.Screen>
   );
 }
