@@ -2,16 +2,16 @@ import Constants from 'expo-constants';
 
 const settings = {
   dev: {
-    apiUrl: 'https://app-backend-api-dev-gwc.azurewebsites.net',
+    apiUrl: 'https://app-backend-api-test-gwc.azurewebsites.net',
   },
   staging: {
-    apiUrl: 'https://app-backend-api-dev-gwc.azurewebsites.net',
+    apiUrl: 'https://app-backend-api-test-gwc.azurewebsites.net',
   },
   prod: {
-    apiUrl: 'https://app-backend-api-dev-gwc.azurewebsites.net',
+    apiUrl: 'https://app-backend-api-test-gwc.azurewebsites.net',
   },
   loginEntryPointUrl:
-    'https://app-backend-api-dev-gwc.azurewebsites.net/auth/login/?p=B2C_1_signup',
+    'https://app-backend-api-test-gwc.azurewebsites.net/auth/login/?p=B2C_1_signup',
 };
 
 const getCurrentSettings = () => {
