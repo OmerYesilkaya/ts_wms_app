@@ -30,7 +30,7 @@ const Home: React.FC = () => {
           theme="primary"
           icon="face"
           order="rtl"
-          totalRadioCount={2}
+          width="49%"
         />
         <Common.RadioInput
           size={Size.SM}
@@ -40,7 +40,7 @@ const Home: React.FC = () => {
           theme="primary"
           icon="face"
           order="rtl"
-          totalRadioCount={2}
+          width="49%"
         />
       </View>
       <Text style={styles.title}>TextInput</Text>

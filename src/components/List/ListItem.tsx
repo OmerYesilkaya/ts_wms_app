@@ -5,7 +5,6 @@ import {
   Image,
   TouchableHighlight,
   Text,
-  StyleSheetProperties,
   Animated,
 } from 'react-native';
 
@@ -18,7 +17,7 @@ type ListItemPropTypes = {
   title: string;
   subTitle?: string;
   style: any; // fix
-  image?: any; // fix
+  image?: string;
   iconName?: React.ComponentProps<typeof MaterialCommunityIcons>['name'];
   iconColor?: string;
   onPress: () => void;
@@ -54,7 +53,7 @@ const ListItem: React.FC<ListItemPropTypes> = ({
           >
             <MaterialCommunityIcons name={iconName} color="#fff" size={20} />
           </View>
-          {image && <Image style={styles.image} source={image} />}
+          {image && <Image style={styles.image} source={{ uri: image }} />}
           <View style={styles.detailsContainer}>
             <Text style={styles.title} numberOfLines={1}>
               {title}

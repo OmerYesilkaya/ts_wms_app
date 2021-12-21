@@ -9,6 +9,8 @@ import {
   AddProfileScreen,
   EntrySelectionScreen,
   ManualEntryScreen,
+  ProfileDetailsScreen,
+  FptAppScreen,
 } from '@app/screens';
 
 const Stack = createStackNavigator();
@@ -63,7 +65,7 @@ const FeedNavigator = () => (
       }}
       component={ManualEntryScreen}
     />
-    {/* 
+
     <Stack.Screen
       name="FptAppScreen"
       options={{
@@ -74,6 +76,7 @@ const FeedNavigator = () => (
       }}
       component={FptAppScreen}
     />
+
     <Stack.Screen
       name="ProfileDetailsScreen"
       options={{
@@ -85,7 +88,7 @@ const FeedNavigator = () => (
         headerBackTitleVisible: false,
       }}
       component={ProfileDetailsScreen}
-    /> */}
+    />
   </Stack.Navigator>
 );
 

@@ -5,10 +5,7 @@ import { Common } from '@app/components';
 import { COLORS } from '@app/constants';
 import { routes } from '@app/navigation';
 
-import icShopMobile from '../assets/images/ic_mobile.png';
-import icShop from '../assets/images/ic_shop.png';
-
-function EntrySelectionScreen({ route, navigation }) {
+function EntrySelectionScreen({ route, navigation }: any) {
   const profile = route.params;
 
   return (
@@ -24,7 +21,7 @@ function EntrySelectionScreen({ route, navigation }) {
               <Image
                 style={{ width: '35%', height: 90 }}
                 resizeMode={'contain'}
-                source={icShopMobile}
+                source={require('@app/images/ic_mobile.png')}
               />
               <Text style={styles.subInnerText} lineBreakMode="clip">
                 Dafür brauchst du dein Kind, ein DIN-A4 Blatt und drei minuten
@@ -44,7 +41,7 @@ function EntrySelectionScreen({ route, navigation }) {
               <Image
                 style={{ width: '35%', height: 70 }}
                 resizeMode={'contain'}
-                source={icShop}
+                source={require('@app/images/ic_shop.png')}
               />
               <Text style={styles.subInnerText} lineBreakMode="clip">
                 Du bist beim Fachhändler oder hast dort gemessen?

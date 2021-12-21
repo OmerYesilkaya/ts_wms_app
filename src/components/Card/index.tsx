@@ -13,7 +13,7 @@ type CardPropTypes = {
   name: string;
   shoeSize: string;
   lastMeasurement: string;
-  image: string | ImageSourcePropType;
+  image: ImageSourcePropType;
   onPress: () => void;
 };
 
@@ -27,7 +27,7 @@ const Card: React.FC<CardPropTypes> = ({
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.card}>
-        <Image style={styles.image} source={image as any} />
+        <Image style={styles.image} source={image} />
         <View style={styles.detailsContainer}>
           <Text style={styles.title} numberOfLines={1}>
             {name}

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -19,23 +19,8 @@ import { routes } from '@app/navigation';
 import { useApi } from '@app/hooks';
 import { useAuth } from '@app/auth'; // ??
 import { stores as storesApi, measurements, localClient } from '@app/api';
-import { date as dateUtils } from '@app/utility';
 
-import imgComponent from '../assets/images/img_component.png';
-import { Size } from '@app/types';
-
-type MeasurementData = {
-  measurementDataId?: Date;
-  profile_id: string | null;
-  bodySize: string;
-  recordDate: Date | null;
-  recordDateUnix: number | null;
-  storeName?: string;
-  storeId?: string;
-  shoe_size?: string;
-  shoe_width?: string;
-  weight?: string;
-};
+import { MeasurementData, Size } from '@app/types';
 
 type StoreType = {
   shop_id: string;
@@ -93,7 +78,6 @@ function ManualEntryScreen({ route, navigation }: any) {
 
   const handleSubmit = async () => {
     if (!selectedDate) {
-      // showAlert("Date input can't be empty")
       Alert.alert('Warning', "Date field can't be empty", [
         { text: 'Okay', onPress: () => null, style: 'default' },
       ]);
@@ -111,11 +95,10 @@ function ManualEntryScreen({ route, navigation }: any) {
     //console.log('Measurement post to api and result', resultApi);
 
     setIsLoading(false);
-    navigation.replace(routes.PROFILES);
-  };
-
-  const showDatePicker = () => {
-    setDatePickerVisibility(true);
+    navigation.reset({
+      index: 0,
+      actions: navigation.navigate(routes.PROFILES),
+    });
   };
 
   const hideDatePicker = () => {
@@ -170,7 +153,7 @@ function ManualEntryScreen({ route, navigation }: any) {
           <Image
             style={{ height: 190 }}
             resizeMode={'contain'}
-            source={imgComponent}
+            source={require('@app/images/img_component.png')}
           />
         </View>
 
@@ -189,21 +172,21 @@ function ManualEntryScreen({ route, navigation }: any) {
               onPress={() => handlePress('S')}
               title="S"
               size={Size.SM}
-              totalRadioCount={3}
+              width="32%"
             />
             <Common.RadioInput
               selected={selectedShoeSize === 'M'}
               onPress={() => handlePress('M')}
               title="M"
               size={Size.SM}
-              totalRadioCount={3}
+              width="32%"
             />
             <Common.RadioInput
               selected={selectedShoeSize === 'W'}
               onPress={() => handlePress('W')}
               title="W"
               size={Size.SM}
-              totalRadioCount={3}
+              width="32%"
             />
           </View>
           <Common.DateInput
@@ -236,6 +219,7 @@ function ManualEntryScreen({ route, navigation }: any) {
                 color: COLORS.dark,
               },
             }}
+            // @ts-ignore, react-native-autocomplete-dropdown has no type definition for renderItem, yet
             renderItem={(item: StoreType, index: number) => (
               <View
                 key={index}

@@ -23,7 +23,7 @@ type ButtonPropTypes = {
   icon?: React.ComponentProps<typeof MaterialCommunityIcons>['name'];
   iconSize?: number;
   order?: 'rtl' | 'ltr';
-  fill?: boolean;
+  width?: string;
 };
 
 const Button: React.FC<ButtonPropTypes> = ({
@@ -36,7 +36,7 @@ const Button: React.FC<ButtonPropTypes> = ({
   iconSize,
   order,
   type,
-  fill = false,
+  width = 'auto',
 }) => {
   let formikObject: any;
   if (type === 'submit') {
@@ -51,7 +51,7 @@ const Button: React.FC<ButtonPropTypes> = ({
           backgroundColor: THEMES.button[theme].background,
           paddingHorizontal: size * 3 + 1,
           paddingVertical: size * 2 + 1,
-          width: fill ? '100%' : undefined,
+          width: width,
         },
       ]}
       onPress={() =>

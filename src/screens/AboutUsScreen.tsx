@@ -25,7 +25,7 @@ function AboutUsScreen({ route }: any) {
       <WebView
         style={styles.container}
         originWhitelist={['*']}
-        source={html as any}
+        source={{ uri: html }}
       />
     )
   );

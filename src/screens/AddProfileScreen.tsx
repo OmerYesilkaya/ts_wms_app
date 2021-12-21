@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { StyleSheet, Image, View } from 'react-native';
-import { footIcon } from '@app/images';
 
 import { profiles } from '@app/api';
 
@@ -130,7 +129,10 @@ function AddProfileScreen({ route, navigation }: any) {
 
   return (
     <View style={styles.container}>
-      <Image style={styles.logo} source={footIcon as any} />
+      <Image
+        style={styles.logo}
+        source={require('@app/images/icon_my_foot.png')}
+      />
       <AddProfileForm
         handleSubmit={handleSubmit}
         isLoading={isLoading}

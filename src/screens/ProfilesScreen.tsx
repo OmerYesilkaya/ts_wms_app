@@ -8,8 +8,6 @@ import { useAuth } from '@app/auth';
 import { routes } from '@app/navigation';
 import { ProfileType, Size } from '@app/types';
 
-import MaleImage from '../assets/images/ic_boy.png';
-import FemaleImage from '../assets/images/ic_girl.png';
 import { date as dateUtils } from '@app/utility';
 
 type ItemType = {
@@ -49,7 +47,11 @@ function ProfilesScreen({ navigation }: any) {
             ? convertDate(item.lastMeasurementUnix)
             : dateUtils.now()
         }
-        image={item.gender === 'MALE' ? MaleImage : FemaleImage}
+        image={
+          item.gender === 'MALE'
+            ? require('@app/images/ic_boy.png')
+            : require('@app/images/ic_boy.png')
+        }
         onPress={async () => {
           const localFP = await getMeasurementsLocal.request(item);
           item.FPs = localFP;
@@ -61,34 +63,55 @@ function ProfilesScreen({ navigation }: any) {
 
   return (
     <Common.Screen style={styles.screen}>
-      {getProfilesApiLive.error && (
+      {getProfilesApiLive.error ? (
+        <View style={{ marginBottom: 10 }}>
+          <Text
+            style={{
+              width: '100%',
+              textAlign: 'center',
+              fontSize: 18,
+              fontWeight: '700',
+              marginBottom: 4,
+            }}
+          >
+            Session Expired
+          </Text>
+          <Common.Button
+            title="Login"
+            onPress={() => logOut()}
+            fill
+            theme="secondary"
+            size={Size.SM}
+          />
+        </View>
+      ) : (
         <>
-          <Text>Session Expired</Text>
-          <Common.Button title="Login" onPress={() => logOut()} fill />
+          <Common.Button
+            title="Neuen Footprint angelen"
+            onPress={() => navigation.navigate(routes.NEW_PROFILE)}
+            fill
+            icon="plus-circle"
+            iconSize={50}
+            order="ltr"
+            size={Size.MD}
+          />
+          <Loader isVisible={getProfilesApiLive.loading} />
+          <View
+            style={{
+              marginTop: 10,
+              flex: 1,
+            }}
+          >
+            <FlatList
+              data={getProfilesApiLive.data}
+              keyExtractor={(item, index) =>
+                item['profile_id'] ?? index.toString()
+              }
+              renderItem={renderItem}
+            />
+          </View>
         </>
       )}
-      <Common.Button
-        title="Neuen Footprint angelen"
-        onPress={() => navigation.navigate(routes.NEW_PROFILE)}
-        fill
-        icon="plus-circle"
-        iconSize={50}
-        order="ltr"
-        size={Size.MD}
-      />
-      <Loader isVisible={getProfilesApiLive.loading} />
-      <View
-        style={{
-          marginTop: 10,
-          flex: 1,
-        }}
-      >
-        <FlatList
-          data={getProfilesApiLive.data}
-          keyExtractor={(item, index) => item['profile_id'] ?? index.toString()}
-          renderItem={renderItem}
-        />
-      </View>
     </Common.Screen>
   );
 }

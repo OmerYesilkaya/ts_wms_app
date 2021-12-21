@@ -62,14 +62,14 @@ const AddProfileForm: React.FC<AddProfileFormPropTypes> = ({
               selected={selectedGender === Gender.MALE}
               onPress={() => handleGenderPress(Gender.MALE)}
               icon="face"
-              totalRadioCount={2}
+              width="49%"
             />
             <Common.RadioInput
               title="weiblich"
               selected={selectedGender === Gender.FEMALE}
               onPress={() => handleGenderPress(Gender.FEMALE)}
               icon="face-woman"
-              totalRadioCount={2}
+              width="49%"
             />
           </View>
           <View style={styles.buttonContainer}>

@@ -20,7 +20,6 @@ const DateInput: React.FC<DateInputPropTypes> = ({
   setDate,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
-  console.log('what is wrong bro, date', date);
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
