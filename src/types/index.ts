@@ -1,5 +1,5 @@
-import { MeasurementData } from './fpt';
-import { Gender, ProfileType } from './profile';
+import { Gender, ProfileType, MeasurementData } from './profile';
+import { StoreType } from './store';
 import { Size } from './style';
 import {
   InterpolateOptions,
@@ -19,6 +19,7 @@ export type {
   MeasurementData,
   Message,
   Scope,
+  StoreType,
   ProfileType,
   TranslateOptions,
 };

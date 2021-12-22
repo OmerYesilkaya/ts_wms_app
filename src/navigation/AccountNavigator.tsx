@@ -2,7 +2,7 @@ import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { AccountScreen } from '@app/screens';
+import { AboutUsScreen, AccountScreen, ExternalLinkScreen } from '@app/screens';
 
 const Stack = createStackNavigator();
 
@@ -15,7 +15,7 @@ const AccountNavigator = () => (
       }}
       component={AccountScreen}
     />
-    {/* <Stack.Screen
+    <Stack.Screen
       name="AboutUsScreen"
       options={{
         title: '',
@@ -23,6 +23,7 @@ const AccountNavigator = () => (
       }}
       component={AboutUsScreen}
     />
+
     <Stack.Screen
       name="ExternalLinkScreen"
       options={{
@@ -30,7 +31,7 @@ const AccountNavigator = () => (
         headerBackTitleVisible: false,
       }}
       component={ExternalLinkScreen}
-    /> */}
+    />
   </Stack.Navigator>
 );
 

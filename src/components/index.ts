@@ -5,6 +5,7 @@ import EditScreenInfo from './EditScreenInfo';
 import List from './List';
 import Loader from './Loader';
 import NavigationHeader from './NavigationHeader';
+import Stores from './Stores';
 
 export {
   AddProfileForm,
@@ -14,4 +15,5 @@ export {
   List,
   Loader,
   NavigationHeader,
+  Stores,
 };

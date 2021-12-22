@@ -1,11 +1,8 @@
 import * as React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-import { RootStackScreenProps } from '@app/types';
-
-type NotFoundScreenPropTypes = RootStackScreenProps<'NotFoundScreen'>;
-
-const NotFoundScreen: React.FC<NotFoundScreenPropTypes> = ({ navigation }) => {
+// fix when navigation is in ts
+const NotFoundScreen: React.FC = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>This screen doesn't exist.</Text>

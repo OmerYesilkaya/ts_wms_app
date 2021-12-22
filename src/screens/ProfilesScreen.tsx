@@ -79,7 +79,6 @@ function ProfilesScreen({ navigation }: any) {
           <Common.Button
             title="Login"
             onPress={() => logOut()}
-            fill
             theme="secondary"
             size={Size.SM}
           />
@@ -89,7 +88,6 @@ function ProfilesScreen({ navigation }: any) {
           <Common.Button
             title="Neuen Footprint angelen"
             onPress={() => navigation.navigate(routes.NEW_PROFILE)}
-            fill
             icon="plus-circle"
             iconSize={50}
             order="ltr"

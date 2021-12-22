@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { AccountNavigator, FeedNavigator } from '.';
+import { StoresScreen } from '@app/screens';
 
 const Tab = createBottomTabNavigator();
 
@@ -27,7 +28,7 @@ const AppNavigator: React.FC<AppNavigatorPropTypes> = ({
         ),
       }}
     />
-    {/* <Tab.Screen
+    <Tab.Screen
       name="StoresScreen"
       component={StoresScreen}
       options={{
@@ -39,7 +40,7 @@ const AppNavigator: React.FC<AppNavigatorPropTypes> = ({
           />
         ),
       }}
-    /> */}
+    />
     <Tab.Screen
       name="AccountNavigator"
       component={AccountNavigator}

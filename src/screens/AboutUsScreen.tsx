@@ -3,7 +3,9 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { WebView } from 'react-native-webview';
 
-import { aboutus, impressum, wissenswertes } from '@app/html';
+import aboutUsHTML from '@app/html/aboutus.html';
+import impressumHTML from '@app/html/impressum.html';
+import wissenswertesHTML from '@app/html/wissenswertes.html';
 
 // Change any types when navigation part is ts
 function AboutUsScreen({ route }: any) {
@@ -11,24 +13,22 @@ function AboutUsScreen({ route }: any) {
 
   switch (route.params.staticPage) {
     case 'aboutus':
-      html = aboutus;
+      html = aboutUsHTML;
       break;
     case 'impressum':
-      html = impressum;
+      html = impressumHTML;
       break;
     case 'faq':
-      html = wissenswertes;
+      html = wissenswertesHTML;
       break;
   }
-  return (
-    route?.params?.staticPage != 'external' && (
-      <WebView
-        style={styles.container}
-        originWhitelist={['*']}
-        source={{ uri: html }}
-      />
-    )
-  );
+  return route?.params?.staticPage != 'external' ? (
+    <WebView
+      style={styles.container}
+      originWhitelist={['*']}
+      source={html as any}
+    />
+  ) : null;
 }
 
 const styles = StyleSheet.create({

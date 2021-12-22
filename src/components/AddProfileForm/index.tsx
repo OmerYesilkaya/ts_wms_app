@@ -78,7 +78,6 @@ const AddProfileForm: React.FC<AddProfileFormPropTypes> = ({
               isLoading={isLoading}
               theme="secondary"
               size={Size.SM}
-              fill
               type="submit"
             />
           </View>
