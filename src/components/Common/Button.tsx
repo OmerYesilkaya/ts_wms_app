@@ -34,7 +34,7 @@ const Button: React.FC<ButtonPropTypes> = ({
   isLoading = false,
   icon,
   iconSize,
-  order,
+  order = 'rtl',
   type,
   width = 'auto',
 }) => {
@@ -67,8 +67,7 @@ const Button: React.FC<ButtonPropTypes> = ({
             <MaterialCommunityIcons
               name={icon}
               color={THEMES.button[theme].text}
-              size={iconSize ? iconSize : size * 4 + 10}
-              style={{ marginRight: size }}
+              size={iconSize ? iconSize : size * 4 + 16}
             />
           )}
           <Text
@@ -81,6 +80,7 @@ const Button: React.FC<ButtonPropTypes> = ({
                   600,
                   Math.min(size * 100, 800)
                 )}` as any,
+                width: icon && '85%',
               },
             ]}
           >
@@ -90,8 +90,7 @@ const Button: React.FC<ButtonPropTypes> = ({
             <MaterialCommunityIcons
               name={icon}
               color={THEMES.button[theme].text}
-              size={iconSize ? iconSize : size * 4 + 10}
-              style={{ marginLeft: size }}
+              size={iconSize ? iconSize : size * 4 + 16}
             />
           )}
         </View>
@@ -112,6 +111,8 @@ const styles = StyleSheet.create({
   align: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-around',
+    width: '100%',
   },
 });
 

@@ -17,4 +17,10 @@ function toFormattedDate(date?: Date) {
   });
 }
 
-export default { now, toFormattedDate };
+const unixDateFormat = (unixTime: number) => {
+  const dateObject = new Date(1970, 0, 1); // Epoch
+  dateObject.setSeconds(unixTime);
+  return dateObject;
+};
+
+export default { now, toFormattedDate, unixDateFormat };

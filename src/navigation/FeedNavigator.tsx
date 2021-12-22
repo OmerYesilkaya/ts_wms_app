@@ -76,7 +76,6 @@ const FeedNavigator = () => (
       }}
       component={FptAppScreen}
     />
-
     <Stack.Screen
       name="ProfileDetailsScreen"
       options={{

@@ -1,109 +1,38 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  Image,
-  Dimensions,
-  Alert,
-} from 'react-native';
-import { LineChart } from 'react-native-chart-kit';
+import { View, StyleSheet, ScrollView, Alert } from 'react-native';
 
 import { routes } from '@app/navigation';
-import { useApi } from '@app/hooks';
+import { useApi, useLocale } from '@app/hooks';
 import { profiles } from '@app/api';
-
 import { useAuth } from '@app/auth';
-import { MeasurementData, Size } from '@app/types';
-import { Common } from '@app/components';
+import { Size } from '@app/types';
 import { COLORS } from '@app/constants';
-
-const optionsLong = {
-  day: '2-digit',
-  month: 'long',
-  year: '2-digit',
-} as Intl.DateTimeFormatOptions;
-const optionsShort = {
-  month: 'long',
-  year: 'numeric',
-} as Intl.DateTimeFormatOptions;
-const optionsVeryShort = {
-  day: '2-digit',
-  month: '2-digit',
-  year: '2-digit',
-} as Intl.DateTimeFormatOptions;
+import {
+  Common,
+  ProfileDetails as ProfileDetailsComponents,
+} from '@app/components';
 
 function ProfileDetailsScreen({ route, navigation }: any) {
+  const { t } = useLocale();
+  const SCOPE_OPTIONS = {
+    scope: 'screens.ProfileDetailsScreen',
+  };
   const { user } = useAuth();
 
   const profile = route.params;
   const deleteProfilesApi = useApi(profiles.deleteProfile);
 
-  const chartDataMeasurementShoeSizes = () => {
-    const result = profile.measurements.map((item: MeasurementData) =>
-      parseInt(item.shoe_size ?? '0')
-    );
-    return result;
-  };
   const handleDelete = () => {
     deleteProfilesApi.request(user, profile);
     navigation.replace(routes.PROFILES);
   };
 
-  const unixDateFormat = (unixTime: number) => {
-    const dateObject = new Date(1970, 0, 1); // Epoch
-    dateObject.setSeconds(unixTime);
-    return dateObject;
-  };
-  const chartDataMeasurementDates = () => {
-    return profile.measurements.map((item: MeasurementData) => {
-      return unixDateFormat(item.recordDateUnix ?? 0).toLocaleString(
-        'de-DE',
-        profile.measurements.length < 3
-          ? optionsLong
-          : profile.measurements.length >= 3 && profile.measurements.length < 5
-          ? optionsShort
-          : optionsVeryShort
-      );
-    });
-  };
-
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.profileContainer}>
-        <Image
-          style={styles.profileImage}
-          source={
-            profile.gender === 'MALE'
-              ? require('@app/images/ic_boy.png')
-              : require('@app/images/ic_boy.png')
-          }
-        />
-        <View style={styles.headerContainer}>
-          <Text style={styles.header}>{profile.name}</Text>
-          {profile.measurements && profile.measurements.length > 0 && (
-            <>
-              <Text style={styles.infoText}>
-                WMS-Schuhgröße: {profile.lastMeasurementSize}
-              </Text>
-              <Text style={styles.infoText}>
-                WMS-Schuhweite: {profile.shoe_width}
-              </Text>
-              <Text style={styles.infoText}>
-                Letze Messung:{' '}
-                {unixDateFormat(profile.lastMeasurementUnix).toLocaleString(
-                  'de-DE',
-                  optionsShort
-                )}
-              </Text>
-            </>
-          )}
-        </View>
-      </View>
+      <ProfileDetailsComponents.UserCard profile={profile} />
       <View style={styles.buttonContainer}>
         <Common.Button
-          title="Beárbeiten"
+          title={t('actions.edit', SCOPE_OPTIONS)}
           icon="pencil"
           onPress={() => navigation.navigate(routes.NEW_PROFILE, profile)}
           order="ltr"
@@ -111,76 +40,47 @@ function ProfileDetailsScreen({ route, navigation }: any) {
           width="49%"
         />
         <Common.Button
-          title="Löschen"
+          title={t('actions.delete', SCOPE_OPTIONS)}
           icon="delete"
           order="ltr"
           size={Size.SM}
           width="49%"
           onPress={() => {
             Alert.alert(
-              'Warnung',
-              'Möchten Sie dieses Profil wirklich löschen?',
+              t('alerts.delete.title', SCOPE_OPTIONS),
+              t('alerts.delete.description', SCOPE_OPTIONS),
               [
                 {
-                  text: 'Bestätigen Sie',
+                  text: t('alerts.delete.confirm', SCOPE_OPTIONS),
                   style: 'default',
                   onPress: () => handleDelete(),
                 },
-                { text: 'Abbrechen', style: 'cancel' },
+                {
+                  text: t('alerts.delete.cancel', SCOPE_OPTIONS),
+                  style: 'cancel',
+                },
               ]
             );
           }}
         />
       </View>
-      {profile.measurements && profile.measurements.length > 0 && (
-        <View style={styles.chartContainer}>
-          <LineChart
-            data={{
-              labels: chartDataMeasurementDates(),
-              datasets: [
-                {
-                  data: chartDataMeasurementShoeSizes(),
-                },
-              ],
-            }}
-            width={Dimensions.get('window').width - 20} // from react-native
-            height={300}
-            chartConfig={{
-              backgroundColor: COLORS.wmsColorDark,
-              backgroundGradientFrom: COLORS.wmsColorDark,
-              backgroundGradientTo: COLORS.wmsColorMedium,
-              strokeWidth: 2, // optional, default 3
-              decimalPlaces: 0, // optional, defaults to 2dp
-              color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-              style: {},
-              propsForBackgroundLines: {
-                color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-              },
-            }}
-            bezier
-            style={styles.chart}
-          />
-        </View>
-      )}
-
-      {profile.measurements && profile.measurements.length === 0 && (
-        <View style={styles.noDataContainer}>
-          <Text style={styles.noDataText}>No measurement data found.</Text>
-          <Text style={styles.noDataInfo}>
-            Please add measurements from below.
-          </Text>
-        </View>
-      )}
+      <ProfileDetailsComponents.MeasurementGraph profile={profile} />
       <View style={{ marginVertical: 10 }}>
         <Common.Button
-          title="Du möchtestmehr über die Fußentwicklung von Kindern erfahren ?"
+          title={t('actions.info', SCOPE_OPTIONS)}
           size={Size.XS}
           theme="info"
           onPress={() => {
             Alert.alert(
-              '',
-              'Durch das Einbeziehen von Größe und Gewicht arbeiten wir daran, zukünftig die Belastung des Fußes zu berechnen, um noch sicherer zu sein, dass der Fuß auch im aktiven Zustand genügend Raum im Schuh hat. Denn je nach Zustand (sitzen,stehen, gehen) verändert sich die Größe unserer Füße, Beim Gehen können die Füße durch das Abrollen länger werden.',
-              [{ text: 'ich verstehe', onPress: () => null, style: 'default' }]
+              t('alerts.info.title', SCOPE_OPTIONS),
+              t('alerts.info.description', SCOPE_OPTIONS),
+              [
+                {
+                  text: t('alerts.info.confirm', SCOPE_OPTIONS),
+                  onPress: () => null,
+                  style: 'default',
+                },
+              ]
             );
           }}
         />
@@ -188,7 +88,7 @@ function ProfileDetailsScreen({ route, navigation }: any) {
       <Common.Button
         theme="secondary"
         size={Size.SM}
-        title="Füße nachmessen"
+        title={t('actions.add', SCOPE_OPTIONS)}
         onPress={() =>
           navigation.navigate(routes.MEASUREMENT_ENTRY_SELECTION, profile)
         }
@@ -217,6 +117,7 @@ const styles = StyleSheet.create({
     height: '100%',
     resizeMode: 'contain',
     marginRight: 10,
+    minWidth: 50,
   },
   profileContainer: {
     flexDirection: 'row',
@@ -229,40 +130,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: 10,
   },
-  chart: {
-    width: '100%',
-    borderRadius: 5,
-  },
-  chartContainer: {
-    flex: 1,
-    marginTop: 10,
-  },
   infoText: {
     fontSize: 15,
-  },
-  noDataContainer: {
-    marginTop: 10,
-    borderRadius: 5,
-    borderWidth: 2,
-    borderStyle: 'dashed',
-    borderColor: COLORS.dark,
-    minHeight: Dimensions.get('screen').height / 3,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: COLORS.white,
-  },
-  noDataText: {
-    color: COLORS.dark,
-    fontSize: 22,
-    fontWeight: '700',
-  },
-  noDataInfo: {
-    color: COLORS.medium,
-    fontSize: 18,
-    fontWeight: '500',
-    maxWidth: '70%',
-    textAlign: 'center',
-    marginTop: 10,
   },
 });
 

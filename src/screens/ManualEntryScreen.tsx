@@ -248,6 +248,8 @@ function ManualEntryScreen({ route, navigation }: any) {
           <View style={{ marginVertical: 10 }}>
             <Common.Button
               theme="info"
+              icon="information"
+              order="rtl"
               size={Size.XS}
               title="Du wunderst dich, warum wir dich danach fragen?"
               onPress={() => {
@@ -270,6 +272,7 @@ function ManualEntryScreen({ route, navigation }: any) {
             title="Footprint aktualisieren"
             isLoading={isLoading}
             theme="secondary"
+            size={Size.SM}
           />
         </View>
         <View>

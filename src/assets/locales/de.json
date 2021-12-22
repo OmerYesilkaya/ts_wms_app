@@ -1,4 +1,42 @@
 {
-  "components": {},
-  "screns": {}
+  "components": {
+    "ProfileDetails": {
+      "MeasurementGraph": {
+        "labels": {
+          "noDataTitle": "No measurement data found.",
+          "noDataDescription": "Please add measurements from below."
+        }
+      },
+      "UserCard": {
+        "labels": {
+          "lastMeasurementSize": "WMS-Schuhgröße: {{value}}",
+          "shoeWidth": "WMS-Schuhweite: {{value}}",
+          "lastMeasurementUnix": "Letze Messung: {{value}}"
+        }
+      }
+    }
+  },
+  "screens": {
+    "ProfileDetailsScreen": {
+      "alerts": {
+        "info": {
+          "title": "",
+          "description": "Durch das Einbeziehen von Größe und Gewicht arbeiten wir daran, zukünftig die Belastung des Fußes zu berechnen, um noch sicherer zu sein, dass der Fuß auch im aktiven Zustand genügend Raum im Schuh hat. Denn je nach Zustand (sitzen,stehen, gehen) verändert sich die Größe unserer Füße, Beim Gehen können die Füße durch das Abrollen länger werden.",
+          "confirm": "Ich verstehe"
+        },
+        "delete": {
+          "title": "Warnung",
+          "description": "Möchten Sie dieses Profil wirklich löschen?",
+          "confirm": "Bestätigen Sie",
+          "cancel": "Abbrechen"
+        }
+      },
+      "actions": {
+        "delete": "Löschen",
+        "edit": "Beárbeiten",
+        "info": "Du möchtestmehr über die Fußentwicklung von Kindern erfahren?",
+        "add": "Füße nachmessen"
+      }
+    }
+  }
 }
