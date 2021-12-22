@@ -45,7 +45,6 @@ function AddProfileScreen({ route, navigation }: any) {
   };
 
   const handleSubmit = async (data: any) => {
-    console.log('DATADATA', data);
     setIsLoading(true);
     if (selectedDate === null) {
       return false;
@@ -74,12 +73,10 @@ function AddProfileScreen({ route, navigation }: any) {
             });
             setIsLoading(false);
           } else {
-            console.log('There was an error while updating the profile.');
             setIsLoading(false);
           }
         })
         .catch((err) => {
-          console.log('err', err);
           setIsLoading(false);
         });
     } else {
@@ -95,12 +92,9 @@ function AddProfileScreen({ route, navigation }: any) {
         measurements: [],
       } as ProfileType;
 
-      console.log('user', user);
-      console.log('requestProfile', requestProfile);
       addProfilesApi
         .request(user, requestProfile)
         .then((result) => {
-          console.log('SAVED RESULT', result);
           if (result.status === 200 || result.status === 201) {
             requestProfile.profile_id = result.data.profile_id;
             requestProfile.name = result.data.name;

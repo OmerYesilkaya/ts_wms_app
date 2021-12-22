@@ -2,13 +2,10 @@ import { create } from 'apisauce';
 import { cache } from '@app/utility';
 import { storage as authStorage } from '@app/auth';
 import { SETTINGS } from '@app/constants';
-import localClient from './localClient';
 
 const apiClient = create({
   baseURL: SETTINGS.apiUrl,
 });
-
-//   const lc = localClient;
 
 apiClient.addAsyncRequestTransform(async (request) => {
   const authToken = await authStorage.getToken();
@@ -26,15 +23,10 @@ apiClient.get = async (url, params, axiosConfig) => {
     //It is not the best place, but most proper for now.
 
     if (url.endsWith('/profiles')) {
-      // read cache profiles
-
-      // cache.store(url, response.data);
-
       // read live profiles
       const lP = response['data'];
       for (let liveIndex = 0; liveIndex < lP.length; liveIndex++) {
         //get local measurements of thisprofile id;
-        //const cP = await cache.get(lP[liveIndex].profile_id);
         let cP = lP[liveIndex].measurements;
 
         if (cP) {
@@ -61,7 +53,6 @@ apiClient.get = async (url, params, axiosConfig) => {
       return response;
     }
 
-    //cache.store(url, response["data"]);
     return response;
   } else if (response.data) {
     //check for user token valid
@@ -77,18 +68,3 @@ apiClient.get = async (url, params, axiosConfig) => {
 };
 
 export default apiClient;
-
-// apiClient.get = async (url, params, axiosConfig) => {
-//   //   const response = await get(url, params, axiosConfig);
-
-//   // if (response.ok) {
-//   //   cache.store(url, response.data);
-//   //   return response;
-//   // }
-
-//   // WORK LOCAL ONLY FOR NOW
-//   const data = await cache.get(url);
-//   return data ? { ok: true, data } : response;
-// };
-
-// export default apiClient;

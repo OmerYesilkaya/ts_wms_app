@@ -38,7 +38,6 @@ function ProfileDetailsScreen({ route, navigation }: any) {
   const { user } = useAuth();
 
   const profile = route.params;
-  console.log(profile);
   const deleteProfilesApi = useApi(profiles.deleteProfile);
 
   const chartDataMeasurementShoeSizes = () => {

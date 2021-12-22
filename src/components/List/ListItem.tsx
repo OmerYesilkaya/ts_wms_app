@@ -41,18 +41,20 @@ const ListItem: React.FC<ListItemPropTypes> = ({
     <Swipeable renderRightActions={renderRightActions}>
       <TouchableHighlight underlayColor={COLORS.light} onPress={onPress}>
         <View style={[styles.container, style]}>
-          <View
-            style={{
-              width: 40,
-              height: 40,
-              borderRadius: 20,
-              backgroundColor: iconColor,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <MaterialCommunityIcons name={iconName} color="#fff" size={20} />
-          </View>
+          {iconName && (
+            <View
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: 20,
+                backgroundColor: iconColor,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <MaterialCommunityIcons name={iconName} color="#fff" size={20} />
+            </View>
+          )}
           {image && <Image style={styles.image} source={{ uri: image }} />}
           <View style={styles.detailsContainer}>
             <Text style={styles.title} numberOfLines={1}>
@@ -96,7 +98,8 @@ const styles = StyleSheet.create({
     color: COLORS.medium,
   },
   title: {
-    fontWeight: '500',
+    fontWeight: '300',
+    fontSize: 16,
   },
 });
 

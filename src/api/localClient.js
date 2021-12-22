@@ -1,41 +1,4 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import cache from '../utility/cache';
-
-const prefix = 'cache';
-let latestProfiles = [];
-
-// const readLocalProfiles = async () => {
-//   //const deleteAllCache = await cache.totalClear();
-//   const data = await cache.get("/profiles");
-//   return { ok: true, data: data };
-// };
-
-// const clearLocalProfiles = () => {
-//   cache.clear("/profiles");
-// };
-// const addLocalProfile = async (user,profile) => {
-//   var data = await cache.get("/profiles");
-//   if (data === null) {
-//     data = [];
-//   }
-//   data.push(profile);
-//   cache.store("/profiles", data);
-//   latestProfiles = data;
-//   return { ok: true, data: data };
-// };
-
-// const readLocalProfile = async (profile_id) => {
-//   var data = await cache.get("/profiles");
-//   if (data === null) {
-//     return null;
-//   }
-
-//   return { ok: true, data: data.filter((t) => t.profile_id == profile_id) };
-// };
-
-// const updateLocalProfile = (profile) => {};
-
-// const deleteLocalProfile = (id) => {};
 
 const addLocalMeasurement = async (measurement) => {
   const cacheKey = measurement.profile_id;
@@ -47,17 +10,6 @@ const addLocalMeasurement = async (measurement) => {
   data.push(measurement);
   cache.store(cacheKey, data);
 
-  // for (let index = 0; index < data.length; index++) {
-  //     data[index].shoe_size = measurement.shoe_size
-  //     data[index].shoe_width = measurement.shoe_width
-  //     data[index].lastMeasurement = measurement.recordDate
-  //     data[index].lastMeasurementUnix = measurement.recordDateUnix
-  //     data[index].measurements.push(measurement)
-
-  //     cache.store(cacheKey, data)
-  //     latestProfiles = data
-  //     return { ok: true, data: data[index] }
-  // }
   return { ok: true, data: data };
 };
 
@@ -74,8 +26,6 @@ const getLocalMeasurements = async (profile) => {
 
   return { ok: true, data: latest };
 };
-
-// const readLocalMeasurements = (profile_id) => {};
 
 export default {
   addLocalMeasurement,

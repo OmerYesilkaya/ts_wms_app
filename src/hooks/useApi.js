@@ -11,7 +11,6 @@ export default function useApi(apiFunc) {
     setLoading(false);
 
     if (!response.ok) {
-      console.log('ERROR', response);
       return setError(true);
     }
     setError(false);

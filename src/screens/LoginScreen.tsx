@@ -23,25 +23,20 @@ function LoginScreen() {
   const [viewVisible, setviewVisible] = useState(true);
 
   const extractLogin = (state: WebViewNavigation) => {
-    console.log('PAGECHANGED:', state);
-
     if (
       !doExtract &&
       state.url.startsWith('https://app-fpt-app-test-gwc.azurewebsites.net')
     ) {
-      console.log('its good url  ', state.url);
       var regex = /[?&]([^=#]+)=([^&#]*)/g,
         params = {} as any,
         match;
       while ((match = regex.exec(state.url))) {
         params[match[1]] = match[2];
         if (match[1] == 'state') {
-          console.log('found state param in url  ', state.url);
           doExtract = true;
         }
       }
       if (doExtract) {
-        console.log('extracting params  ', params);
         handleToken(params.code, params.state);
         doExtract = false;
       }
@@ -49,16 +44,11 @@ function LoginScreen() {
   };
 
   const handleToken = async (code: any, state: any) => {
-    console.log('AUTHAPI LOGIN TRY:');
     const result = await authApi.login(code, state);
-    console.log('EXTRACTED:', result);
     if (!result.ok) return setLoginFailed(true);
     setLoginFailed(false);
-    console.log('TOKEN:', result.data.id_token);
     auth.logIn(result.data.id_token);
   };
-
-  //
 
   return (
     <Common.Screen style={styles.container}>
@@ -79,10 +69,7 @@ function LoginScreen() {
                 setWebViewUrl(webViewUrl + 1);
                 auth.setLoggingOut(false);
                 setviewVisible(true);
-                console.log('auth   ', auth);
               }, 100);
-              console.log('statechanged');
-              console.log(' auth.loggingOut ', auth.loggingOut);
             }
           }}
         />

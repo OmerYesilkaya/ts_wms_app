@@ -8,7 +8,6 @@ const getStores = async () => {
   if (data === null) {
     return client.get(wmsStoresEndPoint);
   }
-  console.log('STORES READ FROM CACHE**');
   return { ok: true, data: data };
 };
 

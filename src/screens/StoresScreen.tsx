@@ -124,7 +124,6 @@ function StoresScreen() {
   const cacheStores = async () => {
     let localStores = await getStoresLocal.request();
     setShops(localStores.data);
-    console.log('shops are set');
   };
 
   const handleRouteAndroidClick = ({
@@ -144,7 +143,6 @@ function StoresScreen() {
       longitude: destination.longitude,
     });
 
-    //console.log(link);
     openMap({ query: link, navigate: true });
   };
 

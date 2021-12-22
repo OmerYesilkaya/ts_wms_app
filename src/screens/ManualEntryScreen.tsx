@@ -60,12 +60,7 @@ const measurementData = {
 function ManualEntryScreen({ route, navigation }: any) {
   const profile = route.params;
   const emptyObject = {};
-  const { user } = useAuth();
   const getStoresLocal = useApi(storesApi.getStores);
-
-  const addProfilesLocalApi = useApi(localClient.addLocalMeasurement);
-
-  const addMeasurementApi = useApi(measurements.addProfileMeasurement);
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
@@ -88,11 +83,6 @@ function ManualEntryScreen({ route, navigation }: any) {
     measurementData.profile_id = profile.profile_id;
     measurementData.recordDate = selectedDate;
     measurementData.recordDateUnix = selectedDateUnix;
-
-    const resultProfile = await addProfilesLocalApi.request(measurementData);
-    const resultApi = await addMeasurementApi.request(user, measurementData);
-    //return to main list
-    //console.log('Measurement post to api and result', resultApi);
 
     setIsLoading(false);
     navigation.reset({

@@ -16,7 +16,7 @@ type ItemType = {
 
 function ProfilesScreen({ navigation }: any) {
   const getProfilesApiLive = useApi(profiles.getProfiles);
-  const getMeasurementsLocal = useApi(localClient.getLocalMeasurements as any); // ??
+  const getMeasurementsLocal = useApi(localClient.getLocalMeasurements);
   const { user, logOut } = useAuth();
 
   const convertDate = (unixSecs: number): string => {
@@ -55,7 +55,7 @@ function ProfilesScreen({ navigation }: any) {
         onPress={async () => {
           const localFP = await getMeasurementsLocal.request(item);
           item.FPs = localFP;
-          navigation.navigate(routes.PROFILE_DETAILS, item); // ??
+          navigation.navigate(routes.PROFILE_DETAILS, item);
         }}
       />
     );
