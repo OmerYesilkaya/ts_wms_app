@@ -6,6 +6,7 @@ import {
   TouchableHighlight,
   Text,
   Animated,
+  ViewStyle,
 } from 'react-native';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -16,7 +17,7 @@ import { COLORS } from '@app/constants';
 type ListItemPropTypes = {
   title: string;
   subTitle?: string;
-  style: any; // fix
+  style: ViewStyle | ViewStyle[];
   image?: string;
   iconName?: React.ComponentProps<typeof MaterialCommunityIcons>['name'];
   iconColor?: string;

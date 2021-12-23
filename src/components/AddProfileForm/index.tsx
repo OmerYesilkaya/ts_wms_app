@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { Common } from '@app/components';
 import { Gender, Size } from '@app/types';
 import { StyleSheet, View } from 'react-native';
+import { useLocale } from '@app/hooks';
 
 type AddProfileFormPropTypes = {
   handleSubmit: any;
@@ -16,12 +17,6 @@ type AddProfileFormPropTypes = {
   isLoading: boolean;
 };
 
-const validationSchema = Yup.object().shape({
-  name: Yup.string()
-    .required('Name ist ein Pflichtfeld')
-    .label('Name eingeben'),
-});
-
 const AddProfileForm: React.FC<AddProfileFormPropTypes> = ({
   handleSubmit,
   profile,
@@ -31,6 +26,17 @@ const AddProfileForm: React.FC<AddProfileFormPropTypes> = ({
   handleGenderPress,
   isLoading,
 }) => {
+  const { t } = useLocale();
+  const SCOPE_OPTIONS = {
+    scope: 'components.AddProfileForm.index',
+  };
+
+  const validationSchema = Yup.object().shape({
+    name: Yup.string()
+      .required(t('form.name.validation', SCOPE_OPTIONS))
+      .label(t('form.name.placeholder', SCOPE_OPTIONS)),
+  });
+
   return (
     <Formik
       initialValues={{ name: profile.name, bdate: '' }}
@@ -41,8 +47,8 @@ const AddProfileForm: React.FC<AddProfileFormPropTypes> = ({
         <View style={styles.container}>
           <Common.TextInput
             name="name"
-            label="Name"
-            placeholder="Name eingeben"
+            label={t('form.name.label', SCOPE_OPTIONS)}
+            placeholder={t('form.name.placeholder', SCOPE_OPTIONS)}
             defaultValue={profile.name}
             icon={
               selectedGender === (profile ? profile.gender : 'MALE')
@@ -53,19 +59,19 @@ const AddProfileForm: React.FC<AddProfileFormPropTypes> = ({
           <Common.DateInput
             date={selectedDate}
             setDate={setSelectedDate}
-            label="Geburtstag"
-            placeholder="Datum auswählen"
+            label={t('form.birthDay.label', SCOPE_OPTIONS)}
+            placeholder={t('form.birthDay.placeholder', SCOPE_OPTIONS)}
           />
           <View style={styles.radioContainer}>
             <Common.RadioInput
-              title="mannlich"
+              title={t('actions.gender.man', SCOPE_OPTIONS)}
               selected={selectedGender === Gender.MALE}
               onPress={() => handleGenderPress(Gender.MALE)}
               icon="face"
               width="49%"
             />
             <Common.RadioInput
-              title="weiblich"
+              title={t('actions.gender.woman', SCOPE_OPTIONS)}
               selected={selectedGender === Gender.FEMALE}
               onPress={() => handleGenderPress(Gender.FEMALE)}
               icon="face-woman"
@@ -74,7 +80,7 @@ const AddProfileForm: React.FC<AddProfileFormPropTypes> = ({
           </View>
           <View style={styles.buttonContainer}>
             <Common.Button
-              title="Weiter"
+              title={t('actions.submit', SCOPE_OPTIONS)}
               isLoading={isLoading}
               theme="secondary"
               size={Size.SM}

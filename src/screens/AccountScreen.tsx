@@ -7,6 +7,7 @@ import { Common, List } from '@app/components';
 import { useAuth } from '@app/auth';
 import { COLORS } from '@app/constants';
 import { routes } from '@app/navigation';
+import { useLocale } from '@app/hooks';
 
 type MenuItem = {
   title: string;
@@ -25,6 +26,10 @@ type Icon = {
 
 // Change any types when navigation part is ts
 function AccountScreen({ navigation }: any) {
+  const { t } = useLocale();
+  const SCOPE_OPTIONS = {
+    scope: 'screens.AccountScreen',
+  };
   const { user, logOut } = useAuth();
 
   function handleAccountClick() {
@@ -38,7 +43,7 @@ function AccountScreen({ navigation }: any) {
       targetScreen: null,
     },
     {
-      title: 'Meine Footprints',
+      title: t('menus.profilesScreen', SCOPE_OPTIONS),
       icon: {
         name: 'foot-print',
         backgroundColor: COLORS.primary,
@@ -46,7 +51,7 @@ function AccountScreen({ navigation }: any) {
       targetScreen: routes.PROFILES,
     },
     {
-      title: 'Shops finden',
+      title: t('menus.storesScreen', SCOPE_OPTIONS),
       icon: {
         name: 'map-search-outline',
         backgroundColor: COLORS.primary,
@@ -54,7 +59,7 @@ function AccountScreen({ navigation }: any) {
       targetScreen: routes.SHOPS,
     },
     {
-      title: 'Wissenswertes', //  useful information
+      title: t('menus.usefulInformation', SCOPE_OPTIONS), //  useful information
       icon: {
         name: 'comment-question-outline',
         backgroundColor: COLORS.primary,
@@ -64,7 +69,7 @@ function AccountScreen({ navigation }: any) {
     },
     {
       styles: { paddingTop: 30 },
-      title: 'Über uns', //    about us
+      title: t('menus.faq', SCOPE_OPTIONS), //    about us
       icon: {
         name: 'information-outline',
         backgroundColor: COLORS.wmsColorMedium,
@@ -73,7 +78,7 @@ function AccountScreen({ navigation }: any) {
       targetScreen: routes.ABOUT_US,
     },
     {
-      title: 'Impressum', //imprint
+      title: t('menus.aboutUs', SCOPE_OPTIONS), //imprint
       icon: {
         name: 'email',
         backgroundColor: COLORS.wmsColorMedium,
@@ -82,7 +87,7 @@ function AccountScreen({ navigation }: any) {
       targetScreen: routes.ABOUT_US,
     },
     {
-      title: 'Datenschutzerklärung', //imprint
+      title: t('menus.externalLink', SCOPE_OPTIONS), //imprint
       icon: {
         name: 'shield-check-outline',
         backgroundColor: COLORS.wmsColorMedium,
@@ -92,7 +97,7 @@ function AccountScreen({ navigation }: any) {
       targetScreen: routes.EXTERNAL_LINK,
     },
     {
-      title: 'Logout',
+      title: t('menus.logout', SCOPE_OPTIONS),
       icon: {
         name: 'logout',
         backgroundColor: COLORS.medium,
@@ -100,6 +105,7 @@ function AccountScreen({ navigation }: any) {
       targetScreen: 'logout',
     },
   ] as MenuItem[];
+
   return (
     <Common.Screen style={styles.screen}>
       <FlatList

@@ -19,7 +19,7 @@ let doExtract = false;
 function LoginScreen() {
   const auth = useAuth();
   const [webViewUrl, setWebViewUrl] = useState(1);
-  const [loginFailed, setLoginFailed] = useState(false);
+  const [loginFailed, setLoginFailed] = useState(false); // ??
   const [viewVisible, setviewVisible] = useState(true);
 
   const extractLogin = (state: WebViewNavigation) => {

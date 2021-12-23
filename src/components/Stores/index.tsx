@@ -1,3 +1,4 @@
+import CustomView from './CustomView';
 import LocationSearchBar from './LocationSearchbar';
 
-export default { LocationSearchBar };
+export default { CustomView, LocationSearchBar };

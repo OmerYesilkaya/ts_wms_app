@@ -4,17 +4,24 @@ import { View, StyleSheet, Image, ScrollView, Text } from 'react-native';
 import { Common } from '@app/components';
 import { COLORS } from '@app/constants';
 import { routes } from '@app/navigation';
+import { useLocale } from '@app/hooks';
 
 function EntrySelectionScreen({ route, navigation }: any) {
+  const { t } = useLocale();
+  const SCOPE_OPTIONS = {
+    scope: 'screens.EntrySelectionScreen',
+  };
   const profile = route.params;
 
   return (
     <ScrollView style={styles.container}>
       <View style={styles.detailsContainer}>
         <Text style={styles.headerText}>
-          Wie möchtest du die Füße deines Kindes messen?
+          {t('labels.header', SCOPE_OPTIONS)}
         </Text>
-        <Text style={styles.subHeaderText}>Du hast zwei Möglichkeiten</Text>
+        <Text style={styles.subHeaderText}>
+          {t('labels.subHeader', SCOPE_OPTIONS)}
+        </Text>
         <View style={styles.optionContainer}>
           <View style={styles.option}>
             <View style={styles.innerContainerRow}>
@@ -24,12 +31,11 @@ function EntrySelectionScreen({ route, navigation }: any) {
                 source={require('@app/images/ic_mobile.png')}
               />
               <Text style={styles.subInnerText} lineBreakMode="clip">
-                Dafür brauchst du dein Kind, ein DIN-A4 Blatt und drei minuten
-                Zeit
+                {t('labels.fptAppDescription', SCOPE_OPTIONS)}
               </Text>
             </View>
             <Common.Button
-              title="Selbst messen"
+              title={t('actions.fptApp', SCOPE_OPTIONS)}
               onPress={() =>
                 navigation.navigate(routes.MEASUREMENT_FPTAPP, profile)
               }
@@ -44,11 +50,11 @@ function EntrySelectionScreen({ route, navigation }: any) {
                 source={require('@app/images/ic_shop.png')}
               />
               <Text style={styles.subInnerText} lineBreakMode="clip">
-                Du bist beim Fachhändler oder hast dort gemessen?
+                {t('labels.manualEntryDescription', SCOPE_OPTIONS)}
               </Text>
             </View>
             <Common.Button
-              title="Manuell eingeben"
+              title={t('actions.manualEntry', SCOPE_OPTIONS)}
               onPress={() =>
                 navigation.navigate(routes.MEASUREMENT_MANUAL, profile)
               }

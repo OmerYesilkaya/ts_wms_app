@@ -16,8 +16,7 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { COLORS } from '@app/constants';
 import { Common } from '@app/components';
 import { routes } from '@app/navigation';
-import { useApi } from '@app/hooks';
-import { useAuth } from '@app/auth'; // ??
+import { useApi, useLocale } from '@app/hooks';
 import { stores as storesApi, measurements, localClient } from '@app/api';
 
 import { MeasurementData, Size } from '@app/types';
@@ -58,6 +57,11 @@ const measurementData = {
 
 // Fix any types when navigation is in ts
 function ManualEntryScreen({ route, navigation }: any) {
+  const { t } = useLocale();
+  const SCOPE_OPTIONS = {
+    scope: 'screens.ManualEntryScreen',
+  };
+
   const profile = route.params;
   const emptyObject = {};
   const getStoresLocal = useApi(storesApi.getStores);
@@ -73,9 +77,17 @@ function ManualEntryScreen({ route, navigation }: any) {
 
   const handleSubmit = async () => {
     if (!selectedDate) {
-      Alert.alert('Warning', "Date field can't be empty", [
-        { text: 'Okay', onPress: () => null, style: 'default' },
-      ]);
+      Alert.alert(
+        t('forms.date.alert.title', SCOPE_OPTIONS),
+        t('forms.date.alert.description', SCOPE_OPTIONS),
+        [
+          {
+            text: t('forms.date.alert.confirm', SCOPE_OPTIONS),
+            onPress: () => null,
+            style: 'default',
+          },
+        ]
+      );
       return;
     }
 
@@ -160,32 +172,34 @@ function ManualEntryScreen({ route, navigation }: any) {
             <Common.RadioInput
               selected={selectedShoeSize === 'S'}
               onPress={() => handlePress('S')}
-              title="S"
+              title={t('actions.shoeSize.small', SCOPE_OPTIONS)}
               size={Size.SM}
               width="32%"
             />
             <Common.RadioInput
               selected={selectedShoeSize === 'M'}
               onPress={() => handlePress('M')}
-              title="M"
+              title={t('actions.shoeSize.medium', SCOPE_OPTIONS)}
               size={Size.SM}
               width="32%"
             />
             <Common.RadioInput
               selected={selectedShoeSize === 'W'}
               onPress={() => handlePress('W')}
-              title="W"
+              title={t('actions.shoeSize.large', SCOPE_OPTIONS)}
               size={Size.SM}
               width="32%"
             />
           </View>
           <Common.DateInput
-            placeholder="Datum auswählen"
+            placeholder={t('forms.date.placeholder', SCOPE_OPTIONS)}
             date={selectedDate}
             setDate={setSelectedDate}
-            label="Datum"
+            label={t('forms.date.label', SCOPE_OPTIONS)}
           />
-          <Text style={styles.titleText}>Gemessen bei</Text>
+          <Text style={styles.titleText}>
+            {t('forms.dropdown.label', SCOPE_OPTIONS)}
+          </Text>
           <AutocompleteDropdown
             clearOnFocus={false}
             closeOnBlur={false}
@@ -199,7 +213,7 @@ function ManualEntryScreen({ route, navigation }: any) {
               backgroundColor: 'transparent',
             }}
             textInputProps={{
-              placeholder: 'Geben Sie 3+ Buchstaben ein',
+              placeholder: t('forms.dropdown.placeholder', SCOPE_OPTIONS),
               autoCorrect: false,
               autoCapitalize: 'none',
               style: {
@@ -227,7 +241,9 @@ function ManualEntryScreen({ route, navigation }: any) {
           />
           <View style={styles.innerContainerRow}>
             <View style={[styles.optionsContainer, { paddingRight: 10 }]}>
-              <Text style={styles.titleText}>Körpergröße</Text>
+              <Text style={styles.titleText}>
+                {t('forms.bodySize.label', SCOPE_OPTIONS)}
+              </Text>
               <RNPickerSelect
                 placeholder={emptyObject}
                 style={styles}
@@ -236,7 +252,9 @@ function ManualEntryScreen({ route, navigation }: any) {
               />
             </View>
             <View style={styles.optionsContainer}>
-              <Text style={styles.titleText}>Gewicht</Text>
+              <Text style={styles.titleText}>
+                {t('forms.weight.label', SCOPE_OPTIONS)}
+              </Text>
               <RNPickerSelect
                 placeholder={emptyObject}
                 style={styles}
@@ -251,14 +269,14 @@ function ManualEntryScreen({ route, navigation }: any) {
               icon="information"
               order="rtl"
               size={Size.XS}
-              title="Du wunderst dich, warum wir dich danach fragen?"
+              title={t('actions.info.title', SCOPE_OPTIONS)}
               onPress={() => {
                 Alert.alert(
-                  '',
-                  'Durch das Einbeziehen von Größe und Gewicht arbeiten wir daran, zukünftig die Belastung des Fußes zu berechnen, um noch sicherer zu sein, dass der Fuß auch im aktiven Zustand genügend Raum im Schuh hat. Denn je nach Zustand (sitzen,stehen, gehen) verändert sich die Größe unserer Füße, Beim Gehen können die Füße durch das Abrollen länger werden.',
+                  t('actions.info.alert.title', SCOPE_OPTIONS),
+                  t('actions.info.alert.description', SCOPE_OPTIONS),
                   [
                     {
-                      text: 'ich verstehe',
+                      text: t('actions.info.alert.confirm', SCOPE_OPTIONS),
                       onPress: () => null,
                       style: 'default',
                     },
@@ -269,7 +287,7 @@ function ManualEntryScreen({ route, navigation }: any) {
           </View>
           <Common.Button
             onPress={handleSubmit}
-            title="Footprint aktualisieren"
+            title={t('actions.submit', SCOPE_OPTIONS)}
             isLoading={isLoading}
             theme="secondary"
             size={Size.SM}

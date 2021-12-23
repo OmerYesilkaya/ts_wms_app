@@ -1,5 +1,34 @@
 {
   "components": {
+    "AddProfileForm": {
+      "index": {
+        "form": {
+          "name": {
+            "label": "Name",
+            "placeholder": "Name eingeben",
+            "validation": "Name ist ein Pflichtfeld"
+          },
+          "birthDay": {
+            "label": "Geburtstag",
+            "placeholder": "Datum auswählen"
+          }
+        },
+        "actions": {
+          "gender": {
+            "man": "mannlich",
+            "woman": "weiblich"
+          },
+          "submit": "Weiter"
+        }
+      }
+    },
+    "Card": {
+      "index": {
+        "labels": {
+          "shoeSize": "WMS-Schuhgröße: {{shoeSize}}"
+        }
+      }
+    },
     "ProfileDetails": {
       "MeasurementGraph": {
         "labels": {
@@ -14,9 +43,97 @@
           "lastMeasurementUnix": "Letze Messung: {{value}}"
         }
       }
+    },
+    "Stores": {
+      "CustomView": {
+        "actions": {
+          "route": "Route anzeigen",
+          "website": "Webseite"
+        }
+      }
+    }
+  },
+  "navigation": {
+    "AccountNavigator": {
+      "titles": {
+        "aboutUsScreen": "",
+        "externalLinkScreen": ""
+      }
+    },
+    "FeedNavigator": {
+      "titles": {
+        "profilesScreen": "Meine Footprint",
+        "addProfileScreen": "Neues Profil",
+        "entrySelectionScreen": "Neues Profil",
+        "manualEntryScreen": "Manuelle Eingabe",
+        "fptAppScreen": "Selbst messen",
+        "profileDetailsScreen": "Fußentwicklung"
+      }
     }
   },
   "screens": {
+    "AccountScreen": {
+      "menus": {
+        "profilesScreen": "Meine Footprints",
+        "storesScreen": "Shops finden",
+        "usefulInformation": "Wissenswertes",
+        "faq": "Über uns",
+        "aboutUs": "Impressum",
+        "externalLink": "Datenschutzerklärung",
+        "logout": "Logout"
+      }
+    },
+    "EntrySelectionScreen": {
+      "labels": {
+        "header": "Wie möchtest du die Füße deines Kindes messen?",
+        "subHeader": "Du hast zwei Möglichkeiten",
+        "fptAppDescription": "Dafür brauchst du dein Kind, ein DIN-A4 Blatt und drei minuten Zeit",
+        "manualEntryDescription": "Du bist beim Fachhändler oder hast dort gemessen?"
+      },
+      "actions": {
+        "fptApp": "Selbst messen",
+        "manualEntry": "Manuell eingeben"
+      }
+    },
+    "ManualEntryScreen": {
+      "forms": {
+        "date": {
+          "alert": {
+            "title": "Warning",
+            "description": "Date field can't be empty",
+            "confirm": "Okay"
+          },
+          "placeholder": "Datum auswählen",
+          "label": "Datum"
+        },
+        "dropdown": {
+          "label": "Gemessen bei",
+          "placeholder": "'Geben Sie 3+ Buchstaben ein'"
+        },
+        "bodySize": {
+          "label": "Körpergröße"
+        },
+        "weight": {
+          "label": "Gewicht"
+        }
+      },
+      "actions": {
+        "info": {
+          "title": "Du wunderst dich, warum wir dich danach fragen?",
+          "alert": {
+            "title": "",
+            "description": "Durch das Einbeziehen von Größe und Gewicht arbeiten wir daran, zukünftig die Belastung des Fußes zu berechnen, um noch sicherer zu sein, dass der Fuß auch im aktiven Zustand genügend Raum im Schuh hat. Denn je nach Zustand (sitzen,stehen, gehen) verändert sich die Größe unserer Füße, Beim Gehen können die Füße durch das Abrollen länger werden.",
+            "confirm": "Ich verstehe"
+          }
+        },
+        "shoeSize": {
+          "small": "S",
+          "medium": "M",
+          "large": "W"
+        },
+        "submit": "Footprint aktualisieren"
+      }
+    },
     "ProfileDetailsScreen": {
       "alerts": {
         "info": {
@@ -36,6 +153,12 @@
         "edit": "Beárbeiten",
         "info": "Du möchtestmehr über die Fußentwicklung von Kindern erfahren?",
         "add": "Füße nachmessen"
+      }
+    },
+    "ProfilesScreen": {
+      "actions": {
+        "addProfile": "Neuen Footprint angelen",
+        "logOut": "Login"
       }
     }
   }

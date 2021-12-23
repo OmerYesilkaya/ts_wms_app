@@ -3,7 +3,7 @@ import { StyleSheet, FlatList, Text, View } from 'react-native';
 
 import { profiles, localClient } from '@app/api';
 import { Common, Card, Loader } from '@app/components';
-import { useApi } from '@app/hooks';
+import { useApi, useLocale } from '@app/hooks';
 import { useAuth } from '@app/auth';
 import { routes } from '@app/navigation';
 import { ProfileType, Size } from '@app/types';
@@ -15,6 +15,11 @@ type ItemType = {
 };
 
 function ProfilesScreen({ navigation }: any) {
+  const { t } = useLocale();
+  const SCOPE_OPTIONS = {
+    scope: 'screens.ProfilesScreen',
+  };
+
   const getProfilesApiLive = useApi(profiles.getProfiles);
   const getMeasurementsLocal = useApi(localClient.getLocalMeasurements);
   const { user, logOut } = useAuth();
@@ -77,7 +82,7 @@ function ProfilesScreen({ navigation }: any) {
             Session Expired
           </Text>
           <Common.Button
-            title="Login"
+            title={t('actions.logOut', SCOPE_OPTIONS)}
             onPress={() => logOut()}
             theme="secondary"
             size={Size.SM}
@@ -86,7 +91,7 @@ function ProfilesScreen({ navigation }: any) {
       ) : (
         <>
           <Common.Button
-            title="Neuen Footprint angelen"
+            title={t('actions.addProfile', SCOPE_OPTIONS)}
             onPress={() => navigation.navigate(routes.NEW_PROFILE)}
             icon="plus-circle"
             iconSize={50}

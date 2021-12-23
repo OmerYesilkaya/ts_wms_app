@@ -1,4 +1,5 @@
 import { COLORS } from '@app/constants';
+import { useLocale } from '@app/hooks';
 import React from 'react';
 import {
   View,
@@ -24,6 +25,11 @@ const Card: React.FC<CardPropTypes> = ({
   image,
   onPress,
 }) => {
+  const { t } = useLocale();
+  const SCOPE_OPTIONS = {
+    scope: 'components.Card.index',
+  };
+
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.card}>
@@ -33,7 +39,7 @@ const Card: React.FC<CardPropTypes> = ({
             {name}
           </Text>
           <Text style={styles.subTitle} numberOfLines={2}>
-            WMS-Schuhgröße: {shoeSize}
+            {t('labels.shoeSize', { shoeSize, ...SCOPE_OPTIONS })}
           </Text>
           <Text style={styles.subTitle} numberOfLines={2}>
             {lastMeasurement}
