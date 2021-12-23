@@ -226,7 +226,7 @@ function ManualEntryScreen({ route, navigation }: any) {
             // @ts-ignore, react-native-autocomplete-dropdown has no type definition for renderItem, yet
             renderItem={(item: StoreType, index: number) => (
               <View
-                key={index}
+                key={`${item.shop_id}-${index}`}
                 style={{
                   paddingHorizontal: 10,
                   paddingVertical: 5,

@@ -1,12 +1,11 @@
+import { COLORS } from '@app/constants';
 import React from 'react';
 import { Text, View } from 'react-native';
 
-const ErrorText: React.FC<any> = (props) => {
-  console.log('error text props', props);
-
+const ErrorText: React.FC = ({ children }) => {
   return (
-    <View>
-      <Text>test</Text>
+    <View style={{ marginTop: 10 }}>
+      <Text style={{ color: COLORS.danger }}>{children}</Text>
     </View>
   );
 };
