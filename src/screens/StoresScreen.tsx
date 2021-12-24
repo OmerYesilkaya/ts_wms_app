@@ -1,18 +1,15 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { StyleSheet, View, Text, Dimensions, Platform } from 'react-native';
+import { View, Platform } from 'react-native';
 
 import MapView from 'react-native-map-clustering';
 
-import { Callout, CalloutSubview, Marker } from 'react-native-maps';
+import { Callout, Marker } from 'react-native-maps';
 import openMap, { createMapLink } from 'react-native-open-maps';
-
-import * as Linking from 'expo-linking';
 
 import { useApi, useLocation } from '@app/hooks';
 import { stores as storesApi } from '@app/api';
 import { Stores as StoresComponents } from '@app/components';
 import { StoreType } from '@app/types';
-import { COLORS } from '@app/constants';
 
 function StoresScreen() {
   const getStoresLocal = useApi(storesApi.getStores);

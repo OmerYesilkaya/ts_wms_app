@@ -6,7 +6,7 @@ import { Common, Card, Loader } from '@app/components';
 import { useApi, useLocale } from '@app/hooks';
 import { useAuth } from '@app/auth';
 import { routes } from '@app/navigation';
-import { ProfileType, Size } from '@app/types';
+import { Gender, ProfileType, Size } from '@app/types';
 
 import { date as dateUtils } from '@app/utility';
 
@@ -27,12 +27,7 @@ function ProfilesScreen({ navigation }: any) {
   const convertDate = (unixSecs: number): string => {
     const dateObject = new Date(1970, 0, 1); // Epoch
     dateObject.setSeconds(unixSecs);
-    return dateObject.toLocaleString('de-DE', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
+    return dateUtils.toFormattedDate(dateObject);
   };
 
   useEffect(() => {
@@ -53,7 +48,7 @@ function ProfilesScreen({ navigation }: any) {
             : dateUtils.now()
         }
         image={
-          item.gender === 'MALE'
+          item.gender === Gender.MALE
             ? require('@app/images/ic_boy.png')
             : require('@app/images/ic_boy.png')
         }
@@ -70,17 +65,7 @@ function ProfilesScreen({ navigation }: any) {
     <Common.Screen style={styles.screen}>
       {getProfilesApiLive.error ? (
         <View style={{ marginBottom: 10 }}>
-          <Text
-            style={{
-              width: '100%',
-              textAlign: 'center',
-              fontSize: 18,
-              fontWeight: '700',
-              marginBottom: 4,
-            }}
-          >
-            Session Expired
-          </Text>
+          <Text style={styles.sessionExpiredMessageText}>Session Expired</Text>
           <Common.Button
             title={t('actions.logOut', SCOPE_OPTIONS)}
             onPress={() => logOut()}
@@ -124,6 +109,13 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingHorizontal: 5,
     flex: 1,
+  },
+  sessionExpiredMessageText: {
+    width: '100%',
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: '700',
+    marginBottom: 4,
   },
 });
 

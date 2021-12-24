@@ -5,7 +5,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { Common, List } from '@app/components';
 import { useAuth } from '@app/auth';
-import { COLORS } from '@app/constants';
+import { COLORS, URLS } from '@app/constants';
 import { routes } from '@app/navigation';
 import { useLocale } from '@app/hooks';
 
@@ -93,7 +93,7 @@ function AccountScreen({ navigation }: any) {
         backgroundColor: COLORS.wmsColorMedium,
       },
       staticPage: 'external',
-      externalLink: 'https://footprinttech.de/wms-dsgvo/',
+      externalLink: URLS.EXTERNAL_LINK,
       targetScreen: routes.EXTERNAL_LINK,
     },
     {

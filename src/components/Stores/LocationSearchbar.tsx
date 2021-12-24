@@ -24,7 +24,7 @@ const screenWidth = Dimensions.get('screen').width;
 const containerWidth = screenWidth - containerHorizontalMargin;
 
 type LocationSearchBarPropTypes = {
-  animateToRegion: any; // fix
+  animateToRegion: (lat?: number, long?: number) => void;
 };
 
 function LocationSearchBar({ animateToRegion }: LocationSearchBarPropTypes) {
@@ -71,7 +71,7 @@ function LocationSearchBar({ animateToRegion }: LocationSearchBarPropTypes) {
     setSuggestionsList(suggestions);
   }
   const handlestoreSelection = (store: StoreType) => {
-    animateToRegion(store.latitude, store.longitude);
+    animateToRegion(Number(store.latitude), Number(store.longitude));
     if (searchRef.current) {
       searchRef.current.blur();
     }

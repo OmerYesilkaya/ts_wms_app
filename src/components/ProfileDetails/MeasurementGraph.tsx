@@ -90,7 +90,9 @@ const MeasurementGraph: React.FC<MeasurementGraphPropTypes> = ({ profile }) => {
       <Text style={styles.noDataTitle}>
         {t('labels.noDataTitle', SCOPE_OPTIONS)}
       </Text>
-      <Text style={styles.noDataDescription}></Text>
+      <Text style={styles.noDataDescription}>
+        {t('labels.noDataDescription', SCOPE_OPTIONS)}
+      </Text>
     </View>
   );
 };

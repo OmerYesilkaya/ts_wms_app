@@ -1,18 +1,14 @@
 import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 
+import WebView, { WebViewNavigation } from 'react-native-webview';
+
 import Constants from 'expo-constants';
 
 import { Common } from '@app/components';
 import { useAuth } from '@app/auth';
 import { auth as authApi } from '@app/api';
-
-import WebView, { WebViewNavigation } from 'react-native-webview';
-
-const LOGOUT_URL =
-  'https://app-backend-api-test-gwc.azurewebsites.net/auth/logout';
-const LOGIN_URL =
-  'https://app-backend-api-test-gwc.azurewebsites.net/auth/login/?p=B2C_1_signup';
+import { URLS } from '@app/constants';
 
 let doExtract = false;
 
@@ -23,10 +19,7 @@ function LoginScreen() {
   const [viewVisible, setviewVisible] = useState(true);
 
   const extractLogin = (state: WebViewNavigation) => {
-    if (
-      !doExtract &&
-      state.url.startsWith('https://app-fpt-app-test-gwc.azurewebsites.net')
-    ) {
+    if (!doExtract && state.url.startsWith(URLS.FPT_BASE_TEST_URL)) {
       var regex = /[?&]([^=#]+)=([^&#]*)/g,
         params = {} as any,
         match;
@@ -57,7 +50,7 @@ function LoginScreen() {
           incognito={true}
           key={webViewUrl}
           source={{
-            uri: auth.loggingOut ? LOGOUT_URL : LOGIN_URL,
+            uri: auth.loggingOut ? URLS.LOGOUT_URL : URLS.LOGIN_URL,
           }}
           onNavigationStateChange={(navState) => {
             // Keep track of going back navigation within component

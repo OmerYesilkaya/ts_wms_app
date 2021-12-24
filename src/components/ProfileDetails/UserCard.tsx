@@ -1,8 +1,10 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
+
 import { date as dateUtils } from '@app/utility';
 import { COLORS } from '@app/constants';
 import { useLocale } from '@app/hooks';
+import { Gender } from '@app/types';
 
 type UserCardPropTypes = {
   profile: any;
@@ -19,7 +21,7 @@ const UserCard: React.FC<UserCardPropTypes> = ({ profile }) => {
       <Image
         style={styles.profileImage}
         source={
-          profile.gender === 'MALE'
+          profile.gender === Gender.MALE
             ? require('@app/images/ic_boy.png')
             : require('@app/images/ic_boy.png')
         }

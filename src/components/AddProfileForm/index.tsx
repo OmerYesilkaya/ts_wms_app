@@ -51,7 +51,7 @@ const AddProfileForm: React.FC<AddProfileFormPropTypes> = ({
             placeholder={t('form.name.placeholder', SCOPE_OPTIONS)}
             defaultValue={profile.name}
             icon={
-              selectedGender === (profile ? profile.gender : 'MALE')
+              selectedGender === (profile ? profile.gender : Gender.MALE)
                 ? 'face'
                 : 'face-woman'
             }

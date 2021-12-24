@@ -17,7 +17,7 @@ import { COLORS } from '@app/constants';
 import { Common } from '@app/components';
 import { routes } from '@app/navigation';
 import { useApi, useLocale } from '@app/hooks';
-import { stores as storesApi, measurements, localClient } from '@app/api';
+import { stores as storesApi } from '@app/api';
 
 import { MeasurementData, Size } from '@app/types';
 

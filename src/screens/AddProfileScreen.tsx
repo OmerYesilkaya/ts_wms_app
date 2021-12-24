@@ -18,8 +18,10 @@ startDate.setDate(startDate.getMonth() - 365 * 10);
 function AddProfileScreen({ route, navigation }: any) {
   const { user } = useAuth();
   const profileParams = route.params;
+
   const addProfilesApi = useApi(profiles.addProfile);
   const updateProfilesApi = useApi(profiles.updateProfile);
+
   const [isLoading, setIsLoading] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(
     profileParams?.birthdate ? new Date(profileParams?.birthdate) : startDate
