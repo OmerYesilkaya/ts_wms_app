@@ -115,6 +115,12 @@
         },
         "weight": {
           "label": "Gewicht"
+        },
+        "shoeSize": {
+          "label": "Schuhgröße"
+        },
+        "selectShoeSize": {
+          "label": "Schuhweite"
         }
       },
       "actions": {
@@ -132,6 +138,9 @@
           "large": "W"
         },
         "submit": "Footprint aktualisieren"
+      },
+      "labels": {
+        "header": "WMS Größe eingeben"
       }
     },
     "ProfileDetailsScreen": {

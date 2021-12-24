@@ -137,7 +137,8 @@ function ManualEntryScreen({ route, navigation }: any) {
     }
     const suggestions = localStores.data
       .filter((t: StoreType) => t.title.toLowerCase().includes(q.toLowerCase()))
-      .map(({ shop_id, title, street }: StoreType) => ({
+      .map(({ shop_id, title, street }: StoreType, index: number) => ({
+        id: index,
         shop_id: shop_id,
         title: title,
         street: street,
@@ -151,7 +152,9 @@ function ManualEntryScreen({ route, navigation }: any) {
     <ScrollView style={styles.container}>
       <View style={styles.detailsContainer}>
         <View style={styles.headerContainer}>
-          <Text style={styles.headerText}>WMS Größe eingeben</Text>
+          <Text style={styles.headerText}>
+            {t('labels.header', SCOPE_OPTIONS)}
+          </Text>
           <Image
             style={{ height: 190 }}
             resizeMode={'contain'}
@@ -160,14 +163,18 @@ function ManualEntryScreen({ route, navigation }: any) {
         </View>
 
         <View style={{ padding: 12 }}>
-          <Text style={styles.titleText}>Schuhgröße</Text>
+          <Text style={styles.titleText}>
+            {t('forms.shoeSize.label', SCOPE_OPTIONS)}
+          </Text>
           <RNPickerSelect
             placeholder={emptyObject}
             style={styles}
             onValueChange={(value) => (measurementData.shoe_size = value)}
             items={shoeSizeOptions}
           />
-          <Text style={styles.titleText}>Schuhweite</Text>
+          <Text style={styles.titleText}>
+            {t('forms.selectShoeSize.label', SCOPE_OPTIONS)}
+          </Text>
           <View style={styles.toggleHolder}>
             <Common.RadioInput
               selected={selectedShoeSize === 'S'}

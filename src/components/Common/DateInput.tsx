@@ -4,6 +4,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
+import { date as dateUtils } from '@app/utility';
+
 type DateInputPropTypes = {
   label: string;
   placeholder: string;
@@ -28,15 +30,8 @@ const DateInput: React.FC<DateInputPropTypes> = ({
         onPress={() => setIsVisible(true)}
       >
         <MaterialCommunityIcons name="calendar" size={30} />
-        <Text style={[styles.date, { color: date ? 'default' : 'lightgray' }]}>
-          {date
-            ? date.toLocaleDateString('de-LI', {
-                weekday: 'long',
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric',
-              })
-            : placeholder}
+        <Text style={styles.date}>
+          {date ? dateUtils.toFormattedDate(date) : placeholder}
         </Text>
       </TouchableOpacity>
       <DateTimePickerModal
