@@ -70,6 +70,7 @@ function ProfileDetailsScreen({ route, navigation }: any) {
           title={t('actions.info', SCOPE_OPTIONS)}
           size={Size.XS}
           theme="info"
+          icon="information"
           onPress={() => {
             Alert.alert(
               t('alerts.info.title', SCOPE_OPTIONS),

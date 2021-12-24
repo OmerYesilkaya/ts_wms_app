@@ -18,14 +18,17 @@ const UserCard: React.FC<UserCardPropTypes> = ({ profile }) => {
 
   return (
     <View style={styles.profileContainer}>
-      <Image
-        style={styles.profileImage}
-        source={
-          profile.gender === Gender.MALE
-            ? require('@app/images/ic_boy.png')
-            : require('@app/images/ic_boy.png')
-        }
-      />
+      <View style={styles.profileImageContainer}>
+        <Image
+          style={styles.profileImage}
+          source={
+            profile.gender === Gender.MALE
+              ? require('@app/images/ic_boy.png')
+              : require('@app/images/ic_boy.png')
+          }
+        />
+      </View>
+
       <View style={styles.headerContainer}>
         <Text style={styles.header}>{profile.name}</Text>
         {profile.measurements && profile.measurements.length > 0 && (
@@ -64,6 +67,7 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 22,
     fontWeight: '600',
+    color: COLORS.white,
   },
   headerContainer: {
     flexGrow: 2.2,
@@ -75,16 +79,28 @@ const styles = StyleSheet.create({
     height: '100%',
     resizeMode: 'contain',
     marginRight: 10,
-    minWidth: 50,
+    width: '100%',
+  },
+  profileImageContainer: {
+    backgroundColor: COLORS.white,
+    shadowColor: 'rgb(0,50,0)',
+    shadowOpacity: 0.2,
+    shadowOffset: { height: 3, width: 0 },
+    borderRadius: 5,
+    paddingVertical: 10,
+    width: 82,
+    marginRight: 15,
   },
   profileContainer: {
     flexDirection: 'row',
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.wmsColorDark,
     borderRadius: 5,
     padding: 10,
+    height: 100,
   },
   infoText: {
     fontSize: 15,
+    color: COLORS.white,
   },
 });
 

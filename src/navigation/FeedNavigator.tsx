@@ -22,52 +22,52 @@ const FeedNavigator = () => {
     scope: 'navigation.FeedNavigator',
   };
 
+  const headerStyles = {
+    headerStyle: { backgroundColor: COLORS.white },
+    headerTitleStyle: {
+      fontSize: 20,
+      color: COLORS.wmsColorDark,
+    },
+    headerBackTitleStyle: {
+      color: COLORS.wmsColorDark,
+    },
+    headerTintColor: COLORS.wmsColorDark,
+  };
+
   return (
     <Stack.Navigator>
       <Stack.Screen
         name="ProfilesScreen"
         options={{
-          headerStyle: { backgroundColor: COLORS.wmsColor },
           title: t('titles.profilesScreen', SCOPE_OPTIONS),
-          headerTitle: (props) => (
-            <NavigationHeader title="Meine Footprint" {...props} />
-          ),
+          ...headerStyles,
         }}
         component={ProfilesScreen}
       />
       <Stack.Screen
         name="AddProfileScreen"
         options={{
-          headerStyle: { backgroundColor: COLORS.wmsColor },
           title: t('titles.addProfileScreen', SCOPE_OPTIONS),
-          headerTitleStyle: {
-            fontSize: 20,
-          },
           headerBackTitleVisible: false,
+          ...headerStyles,
         }}
         component={AddProfileScreen}
       />
       <Stack.Screen
         name="EntrySelectionScreen"
         options={{
-          headerStyle: { backgroundColor: COLORS.wmsColor },
           title: t('titles.entrySelectionScreen', SCOPE_OPTIONS),
-          headerTitleStyle: {
-            fontSize: 20,
-          },
           headerBackTitleVisible: false,
+          ...headerStyles,
         }}
         component={EntrySelectionScreen}
       />
       <Stack.Screen
         name="ManualEntryScreen"
         options={{
-          headerStyle: { backgroundColor: COLORS.wmsColor },
           title: t('titles.manualEntryScreen', SCOPE_OPTIONS),
-          headerTitleStyle: {
-            fontSize: 20,
-          },
           headerBackTitleVisible: false,
+          ...headerStyles,
         }}
         component={ManualEntryScreen}
       />
@@ -75,21 +75,16 @@ const FeedNavigator = () => {
         name="FptAppScreen"
         options={{
           title: t('titles.fptAppScreen', SCOPE_OPTIONS),
-          headerTitleStyle: {
-            fontSize: 20,
-          },
+          ...headerStyles,
         }}
         component={FptAppScreen}
       />
       <Stack.Screen
         name="ProfileDetailsScreen"
         options={{
-          headerStyle: { backgroundColor: COLORS.wmsColor },
           title: t('titles.profileDetailsScreen', SCOPE_OPTIONS),
-          headerTitleStyle: {
-            fontSize: 20,
-          },
           headerBackTitleVisible: false,
+          ...headerStyles,
         }}
         component={ProfileDetailsScreen}
       />

@@ -33,7 +33,9 @@ const Card: React.FC<CardPropTypes> = ({
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.card}>
-        <Image style={styles.image} source={image} />
+        <View style={styles.imageContainer}>
+          <Image style={styles.image} source={image} />
+        </View>
         <View style={styles.detailsContainer}>
           <Text style={styles.title} numberOfLines={1}>
             {name}
@@ -54,11 +56,11 @@ const styles = StyleSheet.create({
   card: {
     flexDirection: 'row',
     borderRadius: 5,
-    backgroundColor: COLORS.wmsColorMedium,
+    backgroundColor: COLORS.wmsColorDark,
     marginBottom: 10,
     padding: 10,
-    paddingHorizontal: 15,
     alignItems: 'center',
+    height: 80,
   },
   detailsContainer: {
     flexGrow: 1.3,
@@ -68,15 +70,25 @@ const styles = StyleSheet.create({
     flex: 1,
     flexGrow: 1.2,
     height: '100%',
+    width: '100%',
     resizeMode: 'contain',
   },
+  imageContainer: {
+    width: 63,
+    backgroundColor: 'white',
+    paddingVertical: 7,
+    borderRadius: 5,
+    shadowColor: 'rgb(0,50,0)',
+    shadowOpacity: 0.2,
+    shadowOffset: { height: 3, width: 0 },
+  },
   subTitle: {
-    color: COLORS.black,
+    color: COLORS.white,
     fontWeight: '500',
   },
   title: {
     fontWeight: 'bold',
-    color: COLORS.black,
+    color: COLORS.white,
     fontSize: 20,
   },
 });
