@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import * as Location from 'expo-location';
+import { Alert } from 'react-native';
 
 type Location = null | {
   latitude: number;
@@ -21,7 +22,18 @@ export default function useLocation() {
       } = (await Location.getLastKnownPositionAsync())!;
       setLocation({ latitude, longitude });
     } catch (error) {
-      console.log(error);
+      Alert.alert(
+        'Error',
+        'There was a problem while getting the location. Please check logs the get more information.',
+        [
+          {
+            text: 'Okay',
+            onPress: () => null,
+            style: 'default',
+          },
+        ]
+      );
+      console.log('location.get', error);
     }
   };
 

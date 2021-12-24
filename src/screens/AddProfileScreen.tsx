@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Image, View } from 'react-native';
+import { StyleSheet, Image, View, Alert } from 'react-native';
 
 import { profiles } from '@app/api';
 
@@ -110,14 +110,33 @@ function AddProfileScreen({ route, navigation }: any) {
             );
             setIsLoading(false);
           } else {
-            console.log(
-              'There was an error while creating the profile, please try again later.'
+            Alert.alert(
+              'Error',
+              'There was a problem while creating the profile. Please try again later.',
+              [
+                {
+                  text: 'Okay',
+                  onPress: () => null,
+                  style: 'default',
+                },
+              ]
             );
             setIsLoading(false);
           }
         })
         .catch((err) => {
-          console.log('err', err);
+          Alert.alert(
+            'Error',
+            'There was a problem while creating the profile. Please check the logs for more information.',
+            [
+              {
+                text: 'Okay',
+                onPress: () => null,
+                style: 'default',
+              },
+            ]
+          );
+          console.log('profile.add', err);
           setIsLoading(false);
         });
     }

@@ -1,7 +1,7 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import dayjs from "dayjs";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import dayjs from 'dayjs';
 
-const prefix = "cache";
+const prefix = 'cache';
 const expiryInMinutes = 5000;
 
 const store = async (key, value) => {
@@ -12,14 +12,25 @@ const store = async (key, value) => {
     };
     await AsyncStorage.setItem(prefix + key, JSON.stringify(item));
   } catch (error) {
-    console.log(error);
+    Alert.alert(
+      'Error',
+      'There was a problem while storing to cache. Please check the logs for more information.',
+      [
+        {
+          text: 'Okay',
+          onPress: () => null,
+          style: 'default',
+        },
+      ]
+    );
+    console.log('cache.store', error);
   }
 };
 
 const isExpired = (item) => {
   const now = dayjs();
   const storedTime = dayjs(item.timestamp);
-  return now.diff(storedTime, "minute") > expiryInMinutes;
+  return now.diff(storedTime, 'minute') > expiryInMinutes;
 };
 
 const get = async (key) => {
@@ -37,7 +48,18 @@ const get = async (key) => {
 
     return item.value;
   } catch (error) {
-    console.log(error);
+    Alert.alert(
+      'Error',
+      'There was a problem while getting the cache. Please check the logs for more information.',
+      [
+        {
+          text: 'Okay',
+          onPress: () => null,
+          style: 'default',
+        },
+      ]
+    );
+    console.log('cache.get', error);
   }
 };
 
@@ -46,7 +68,18 @@ const clear = async (key) => {
     await AsyncStorage.removeItem(prefix + key);
     return null;
   } catch (error) {
-    console.log(error);
+    Alert.alert(
+      'Error',
+      'There was a problem while clearing the cache. Please check the logs for more information.',
+      [
+        {
+          text: 'Okay',
+          onPress: () => null,
+          style: 'default',
+        },
+      ]
+    );
+    console.log('cache.clear', error);
   }
 };
 const totalClear = async () => {
@@ -54,7 +87,18 @@ const totalClear = async () => {
     await AsyncStorage.clear();
     return null;
   } catch (error) {
-    console.log(error);
+    Alert.alert(
+      'Error',
+      'There was a problem while resetting the cache. Please check the logs for more information.',
+      [
+        {
+          text: 'Okay',
+          onPress: () => null,
+          style: 'default',
+        },
+      ]
+    );
+    console.log('cache.reset', error);
   }
 };
 
