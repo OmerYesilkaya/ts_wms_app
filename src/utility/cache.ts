@@ -1,10 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import dayjs from 'dayjs';
+import { Alert } from 'react-native';
 
 const prefix = 'cache';
 const expiryInMinutes = 5000;
 
-const store = async (key, value) => {
+const store = async (key: string, value: any) => {
   try {
     const item = {
       value,
@@ -27,16 +28,16 @@ const store = async (key, value) => {
   }
 };
 
-const isExpired = (item) => {
+const isExpired = (item: { timestamp: number }) => {
   const now = dayjs();
   const storedTime = dayjs(item.timestamp);
   return now.diff(storedTime, 'minute') > expiryInMinutes;
 };
 
-const get = async (key) => {
+const get = async (key: string) => {
   try {
     const value = await AsyncStorage.getItem(prefix + key);
-    const item = JSON.parse(value);
+    const item = value ? JSON.parse(value) : undefined;
 
     if (!item) return null;
 
@@ -63,7 +64,7 @@ const get = async (key) => {
   }
 };
 
-const clear = async (key) => {
+const clear = async (key: string) => {
   try {
     await AsyncStorage.removeItem(prefix + key);
     return null;

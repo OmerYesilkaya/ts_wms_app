@@ -36,7 +36,7 @@ function LoginScreen() {
     }
   };
 
-  const handleToken = async (code: any, state: any) => {
+  const handleToken = async (code: string, state: string) => {
     const result = await authApi.login(code, state);
     if (!result.ok) return setLoginFailed(true);
     setLoginFailed(false);

@@ -37,8 +37,8 @@ function AccountScreen({ navigation }: any) {
   }
   const aboutUsMenuItems = [
     {
-      title: user.given_name,
-      subTitle: user.emails[0],
+      title: user?.given_name,
+      subTitle: user?.emails[0],
       icon: null,
       targetScreen: null,
     },

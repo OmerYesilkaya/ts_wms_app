@@ -2,6 +2,7 @@ import { create } from 'apisauce';
 import { cache } from '@app/utility';
 import { storage as authStorage } from '@app/auth';
 import { SETTINGS } from '@app/constants';
+import { ProfileType } from '@app/types';
 
 const apiClient = create({
   baseURL: SETTINGS.apiUrl,
@@ -15,7 +16,7 @@ apiClient.addAsyncRequestTransform(async (request) => {
 
 const get = apiClient.get;
 
-apiClient.get = async (url, params, axiosConfig) => {
+apiClient.get = async (url, params, axiosConfig): Promise<any> => {
   const response = await get(url, params, axiosConfig);
 
   if (response.ok) {
@@ -24,7 +25,7 @@ apiClient.get = async (url, params, axiosConfig) => {
 
     if (url.endsWith('/profiles')) {
       // read live profiles
-      const lP = response['data'];
+      const lP = response.data as ProfileType[];
       for (let liveIndex = 0; liveIndex < lP.length; liveIndex++) {
         //get local measurements of thisprofile id;
         let cP = lP[liveIndex].measurements;
@@ -56,15 +57,15 @@ apiClient.get = async (url, params, axiosConfig) => {
     return response;
   } else if (response.data) {
     //check for user token valid
-    if (response.data.statusCode === 401) {
-      return { ok: false, status: response.data.statusCode };
+    if (response.status === 401) {
+      return { ok: false, status: response.status };
     }
   }
 
   const data = await cache.get(url);
   return data
-    ? { ok: true, status: response.data.statusCode, data }
-    : { ok: false, status: response.data.statusCode };
+    ? { ok: true, status: response.status, data }
+    : { ok: false, status: response.status };
 };
 
 export default apiClient;
