@@ -83,21 +83,24 @@ function ProfilesScreen({ navigation }: any) {
             order="ltr"
             size={Size.MD}
           />
-          <Loader isVisible={getProfilesApiLive.loading} />
-          <View
-            style={{
-              marginTop: 10,
-              flex: 1,
-            }}
-          >
-            <FlatList
-              data={getProfilesApiLive.data}
-              keyExtractor={(item, index) =>
-                item['profile_id'] ?? index.toString()
-              }
-              renderItem={renderItem}
-            />
-          </View>
+          {getProfilesApiLive.loading ? (
+            <Loader isVisible={getProfilesApiLive.loading} />
+          ) : (
+            <View
+              style={{
+                marginTop: 10,
+                flex: 1,
+              }}
+            >
+              <FlatList
+                data={getProfilesApiLive.data}
+                keyExtractor={(item, index) =>
+                  item['profile_id'] ?? index.toString()
+                }
+                renderItem={renderItem}
+              />
+            </View>
+          )}
         </>
       )}
     </Common.Screen>
