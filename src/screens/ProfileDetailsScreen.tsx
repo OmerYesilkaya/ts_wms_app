@@ -11,6 +11,7 @@ import {
   Common,
   ProfileDetails as ProfileDetailsComponents,
 } from '@app/components';
+import { CommonActions } from '@react-navigation/native';
 
 function ProfileDetailsScreen({ route, navigation }: any) {
   const { t } = useLocale();
@@ -23,8 +24,14 @@ function ProfileDetailsScreen({ route, navigation }: any) {
   const deleteProfilesApi = useApi(profiles.deleteProfile);
 
   const handleDelete = () => {
-    deleteProfilesApi.request(user, profile);
-    navigation.replace(routes.PROFILES);
+    deleteProfilesApi.request(user, profile).then(() => {
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 1,
+          routes: [{ name: routes.PROFILES }],
+        })
+      );
+    });
   };
 
   return (
