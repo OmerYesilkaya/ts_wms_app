@@ -17,9 +17,11 @@ import { COLORS } from '@app/constants';
 import { Common } from '@app/components';
 import { routes } from '@app/navigation';
 import { useApi, useLocale } from '@app/hooks';
-import { stores as storesApi } from '@app/api';
+import { localClient, measurements, stores as storesApi } from '@app/api';
 
 import { MeasurementData, Size } from '@app/types';
+import { CommonActions } from '@react-navigation/native';
+import { useAuth } from '@app/auth';
 
 type StoreType = {
   shop_id: string;
@@ -64,7 +66,10 @@ function ManualEntryScreen({ route, navigation }: any) {
 
   const profile = route.params;
   const emptyObject = {};
+  const { user } = useAuth();
   const getStoresLocal = useApi(storesApi.getStores);
+  const addProfilesLocalApi = useApi(localClient.addLocalMeasurement);
+  const addMeasurementApi = useApi(measurements.addProfileMeasurement);
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
@@ -96,11 +101,8 @@ function ManualEntryScreen({ route, navigation }: any) {
     measurementData.recordDate = selectedDate;
     measurementData.recordDateUnix = selectedDateUnix;
 
-    setIsLoading(false);
-    navigation.reset({
-      index: 0,
-      actions: navigation.navigate(routes.PROFILES),
-    });
+    await addProfilesLocalApi.request(measurementData);
+    await addMeasurementApi.request(user, measurementData);
   };
 
   const hideDatePicker = () => {
@@ -293,7 +295,17 @@ function ManualEntryScreen({ route, navigation }: any) {
             />
           </View>
           <Common.Button
-            onPress={handleSubmit}
+            onPress={() =>
+              handleSubmit().then(() => {
+                setIsLoading(false);
+                navigation.dispatch(
+                  CommonActions.reset({
+                    index: 1,
+                    routes: [{ name: routes.PROFILES }],
+                  })
+                );
+              })
+            }
             title={t('actions.submit', SCOPE_OPTIONS)}
             isLoading={isLoading}
             theme="secondary"

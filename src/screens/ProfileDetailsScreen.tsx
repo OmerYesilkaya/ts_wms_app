@@ -22,7 +22,6 @@ function ProfileDetailsScreen({ route, navigation }: any) {
 
   const profile = route.params;
   const deleteProfilesApi = useApi(profiles.deleteProfile);
-
   const handleDelete = () => {
     deleteProfilesApi.request(user, profile).then(() => {
       navigation.dispatch(

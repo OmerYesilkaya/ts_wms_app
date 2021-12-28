@@ -66,6 +66,7 @@ const TextInput: React.FC<TextInputPropTypes> = ({
           defaultValue={defaultValue}
           placeholder={placeholder}
           placeholderTextColor={THEMES.textInput[theme].placeholder}
+          autoCorrect={false}
         />
       </View>
       <ErrorMessage component={ErrorText} name={name} />

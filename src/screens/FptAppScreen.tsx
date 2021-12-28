@@ -62,10 +62,7 @@ function FptAppScreen({ route, navigation }: any) {
             };
 
             setTimeout(async () => {
-              const resultApi = await addMeasurementApi.request(
-                user,
-                measurementData
-              );
+              await addMeasurementApi.request(user, measurementData);
               returnHonme();
             }, 5000);
           }
