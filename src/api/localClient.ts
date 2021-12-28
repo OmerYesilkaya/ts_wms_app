@@ -1,4 +1,5 @@
 import { MeasurementData, ProfileType } from '@app/types';
+import { ApiOkResponse } from 'apisauce';
 import cache from '../utility/cache';
 
 const addLocalMeasurement = async (measurement: MeasurementData) => {
@@ -28,7 +29,7 @@ const getLocalMeasurements = async (profile: MeasurementData) => {
     )
     .map((item: ProfileType) => item);
 
-  return { ok: true, data: latest };
+  return { ok: true, data: latest } as ApiOkResponse<any>;
 };
 
 export default {

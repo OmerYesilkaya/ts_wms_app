@@ -1,3 +1,4 @@
+import { ApiOkResponse } from 'apisauce';
 import cache from '../utility/cache';
 import client from './client';
 
@@ -8,7 +9,7 @@ const getStores = async () => {
   if (data === null) {
     return client.get(wmsStoresEndPoint);
   }
-  return { ok: true, data: data };
+  return { ok: true, data: data } as ApiOkResponse<any>;
 };
 
 export default {
